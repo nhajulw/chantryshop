@@ -342,8 +342,6 @@ function buildOrder(){
 // Opens Telegram with the message typed in — the customer taps Send. Nothing is sent automatically.
 const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';
 
-const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';
-
 $('#order').onclick = async () => {
   if (!cartRows().length) return;
   if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរសព្ទ'); $('#cp').focus(); return; }
