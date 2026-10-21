@@ -351,6 +351,14 @@ function buildOrder(){
   ].join('\n');
 }
 
+// builds the invoice as a PDF blob (reuses makeInvoice + pdfParts)
+async function makeInvoicePdf(){
+  const inv = await makeInvoice();
+  const jpg = new Uint8Array(await inv.blob.arrayBuffer());
+  URL.revokeObjectURL(inv.url);
+  return { blob: new Blob(pdfParts(jpg, inv.w, inv.h), { type:'application/pdf' }), no: inv.no };
+}
+  
 // 1) sends the order to your bot automatically (via the Worker)
 // 2) opens the customer's chat with you, message prefilled — they tap Send
 $('#order').onclick = async () => {
@@ -361,18 +369,29 @@ $('#order').onclick = async () => {
   const btn = $('#order');
   btn.disabled = true;
   const text = buildOrder();
+  const name = $('#cn').value.trim(), phone = $('#cp').value.trim();
 
-  // start the automatic send (don't await yet)
+  // 1) text order to your bot (background)
   const relay = fetch(ORDER_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text })
+    body: JSON.stringify({ text }),
+    keepalive: true
   });
 
-  // open the chat in the same tap so the browser doesn't block it
+  // 2) PDF invoice to your bot (background, silent — started now so it
+  //    captures the cart before it is cleared below)
+  makeInvoicePdf().then(({ blob, no }) => {
+    const fd = new FormData();
+    fd.append('document', blob, no + '.pdf');
+    fd.append('caption', `📄 ${no}\n👤 ${name} · 📞 ${phone}`);
+    return fetch(ORDER_URL, { method: 'POST', body: fd, keepalive: blob.size < 60000 });
+  }).then(r => { if (!r.ok) throw new Error('pdf relay ' + r.status); })
+    .catch(e => console.error('PDF relay failed', e));   // never shown to the customer
+
+  // 3) open the customer's Telegram chat in the same tap (so it isn't blocked)
   window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
 
-  // now check the automatic send
   try {
     const r = await relay;
     if (!r.ok) throw new Error('relay ' + r.status);
