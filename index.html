@@ -24,17 +24,13 @@
   <header class="top">
     <div class="logo">🏍️</div>
     <div class="brand"><h1 id="sName"></h1><p id="sTag"></p></div>
-    <div class="cur-sw" role="group" aria-label="រូបិយប័ណ្ណ">
-      <button type="button" data-cur="KHR" class="on">៛ រៀល</button>
-      <button type="button" data-cur="USD">$ USD</button>
-    </div>
+    <div class="curs" role="group" aria-label="រូបិយប័ណ្ណ"><button data-cur="KHR" aria-label="Riel">៛</button><button data-cur="USD" aria-label="US Dollar">$</button></div>
     <button class="cartbtn" id="openCart" aria-label="កន្ត្រក"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><b id="cc">0</b></button>
   </header>
   <section class="hero">
     <svg class="spin" viewBox="0 0 200 200" aria-hidden="true"><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(0 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(30 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(60 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(90 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(120 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(150 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(180 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(210 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(240 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(270 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(300 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(330 100 100)"/><circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="34"/><circle cx="100" cy="100" r="8"/></svg>
     <h2>គ្រឿងបន្លាស់ម៉ូតូ គុណភាពល្អ តម្លៃសមរម្យ</h2>
     <p>ជ្រើសរើសទំនិញ បន្ថែមទៅកន្ត្រក រួចផ្ញើការកម្មង់មកយើងតាម Telegram បានភ្លាមៗ។</p>
-    <div class="rate-pill" id="rateInfo">អត្រាប្តូរប្រាក់ថ្ងៃនេះ៖ $1 = 4,100 ៛</div>
     <div class="cta"><button class="btn call" id="callBtn"><svg class="ic" aria-hidden="true"><use href="#i-call"/></svg> ទូរសព្ទមកហាង</button><a class="btn tg" id="tgBtn" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> Telegram</a></div>
   </section>
   <div class="tools">
@@ -43,7 +39,7 @@
   </div>
   <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
   <button class="fab" id="fab" hidden></button>
-  <footer><span id="fName"></span><a href="#admin">ទំព័រគ្រប់គ្រង</a></footer>
+  <footer><span id="fName"></span><span class="rt"></span><a href="#admin">ទំព័រគ្រប់គ្រង</a></footer>
 </div>
 
 <div class="veil" id="veil"></div>
@@ -52,33 +48,19 @@
   <div class="dl" id="cartList"></div>
   <div class="df">
     <div class="two"><input class="in" id="cn" type="text" placeholder="ឈ្មោះ" maxlength="40" autocomplete="name"><input class="in" id="cp" type="tel" placeholder="លេខទូរសព្ទ" maxlength="20" inputmode="tel" autocomplete="tel"></div>
-    <div class="tot"><span>សរុប</span><span id="cartTotal">0 ៛</span></div>
+    <div class="tot"><span>សរុប</span><span id="cartTotal">0៛</span></div>
+    <p class="hint rt"></p>
     <button class="btn tg wide" id="order"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> ផ្ញើការកម្មង់ទៅ Telegram</button>
-    <div class="opt-dl">
-      <span>រក្សាទុកវិក្កយបត្រជាជម្រើស (ស្រេចចិត្ត)៖</span>
-      <div class="two">
-        <button type="button" class="btn sec sm" id="dlJpg"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> រូបភាព (JPG)</button>
-        <button type="button" class="btn sec sm" id="dlPdf"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> ឯកសារ (PDF)</button>
-      </div>
-    </div>
-    <p class="hint" id="hint"></p>
+    <p class="hint">Telegram នឹងបើកជាមួយសារដែលរៀបចំរួច — គ្រាន់តែចុចផ្ញើ</p>
+    <div class="two"><button class="btn sec" id="invjpg"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> JPG</button><button class="btn sec" id="invpdf"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> PDF</button></div>
+    <p class="hint">រក្សាទុកវិក្កយបត្រ (ស្រេចចិត្ត) — មិនផ្ញើដោយស្វ័យប្រវត្តិទេ</p>
   </div>
 </aside>
 
 <!-- ===== ADMIN ===== -->
 <div id="admin" hidden>
   <div class="adm">
-    <div class="ah">
-      <h2>ទំព័រគ្រប់គ្រង</h2>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <div class="cur-sw" role="group" aria-label="រូបិយប័ណ្ណ">
-          <button type="button" data-cur="KHR" class="on">៛ រៀល</button>
-          <button type="button" data-cur="USD">$ USD</button>
-        </div>
-        <a class="btn sec" href="#">← ត្រឡប់ទៅហាង</a>
-        <button class="btn sec" id="logout" hidden>ចាកចេញ</button>
-      </div>
-    </div>
+    <div class="ah"><h2>ទំព័រគ្រប់គ្រង</h2><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><div class="curs" role="group" aria-label="រូបិយប័ណ្ណ"><button data-cur="KHR" aria-label="Riel">៛</button><button data-cur="USD" aria-label="US Dollar">$</button></div><a class="btn sec" href="#">← ត្រឡប់ទៅហាង</a><button class="btn sec" id="logout" hidden>ចាកចេញ</button></div></div>
     <form id="login" class="form f" hidden style="margin:40px auto;border-radius:24px">
       <h3>ចូលគណនី</h3>
       <div class="f"><label for="em">អ៊ីមែល</label><input class="in" id="em" type="email" required autocomplete="username"></div>
@@ -88,12 +70,12 @@
     </form>
     <div id="dash">
       <div class="note" id="demo" hidden>Demo mode: changes are saved on this device only. Add your Firebase config to go live for all visitors.</div>
-      <div class="rate-bar" id="admRate">អត្រាប្តូរប្រាក់ប្រចាំថ្ងៃ៖ $1 = 4,100 ៛</div>
       <div class="stats">
         <div class="st"><b id="s1">0</b><span>ទំនិញសរុប</span></div>
         <div class="st"><b id="s2">0</b><span>មានស្តុក</span></div>
         <div class="st o"><b id="s3">0</b><span>អស់ស្តុក</span></div>
       </div>
+      <p class="rt" style="margin-bottom:12px"></p>
       <button class="btn pri" id="addNew">+ បន្ថែមទំនិញ</button>
       <div class="flt"><input class="search" id="aq" type="search" placeholder="ស្វែងរកទំនិញ..."><select id="af" class="sel" aria-label="ប្រភេទ"></select></div>
       <div id="aList"></div>
@@ -106,17 +88,9 @@
   <form class="form f" id="pform">
     <h3 id="mTitle">បន្ថែមទំនិញ</h3>
     <div class="f"><label for="pn">ឈ្មោះទំនិញ</label><input class="in" id="pn" type="text" required maxlength="80"></div>
-    <div class="f">
-      <label for="pp">តម្លៃ</label>
-      <div class="price-in">
-        <input class="in" id="pp" type="number" step="any" min="0" required inputmode="decimal">
-        <select class="sel" id="pcur" aria-label="រូបិយប័ណ្ណតម្លៃ">
-          <option value="KHR">៛ (រៀល)</option>
-          <option value="USD">$ (ដុល្លារ)</option>
-        </select>
-      </div>
-      <small class="conv-pv" id="convPv"></small>
-    </div>
+    <div class="f"><label for="pp">តម្លៃ</label>
+      <div class="prow"><input class="in" id="pp" type="number" step="any" min="0" required inputmode="decimal"><select class="sel" id="pcur" aria-label="រូបិយប័ណ្ណ"><option value="KHR">៛ រៀល</option><option value="USD">$ ដុល្លារ</option></select></div>
+      <small class="rt" id="pconv" style="display:block;margin-top:5px"></small></div>
     <div class="f"><label for="pc">ប្រភេទ</label><select class="sel" id="pc"></select></div>
     <div class="f"><label>រូបភាព (កាត់ជាការ៉េ 1:1 ដោយស្វ័យប្រវត្តិ)</label>
       <div class="up"><div class="pv" id="pv"></div>
@@ -141,88 +115,56 @@ const FIREBASE_CONFIG = {
   appId: "1:410063645368:web:ce9dcbc71b4bf20279624d"
 };
 const CATS = ['សំបក','ពោះវៀន','ច្រវ៉ាក់ឈុត','ខ្ចៅ','អំពូល','កុងតាក់','គ្រឿងជ័រ','គ្រឿងក្រៅ','ប្រេងម៉ាស៊ីន','ផ្សេងៗ'];
-// Direct-to-Telegram sending (optional). Leave both empty to use the simple link mode.
-const ORDER = { botToken:'', chatId:'' };
-const DEFAULT_RATE = 4100; // Fallback USD to KHR rate if offline
+const DEFAULT_CUR = 'KHR';          // site default currency: 'KHR' or 'USD'
+const FALLBACK_RATE = 4100;         // used only if the live rate can't be loaded and nothing is cached
 /* ================================================================== */
 
 const SEED = [
- {id:'s1',name:'ប្រេងម៉ាស៊ីន 4T 0.8L',price:3.5,cat:'ប្រេងម៉ាស៊ីន',stock:true,img:'',t:3},
- {id:'s2',name:'សំបកកង់ក្រោយ 80/90-17',price:18,cat:'សំបក',stock:true,img:'',t:2},
- {id:'s3',name:'អំពូលមុខ LED',price:12,cat:'អំពូល',stock:false,img:'',t:1}
+ {id:'s1',name:'ប្រេងម៉ាស៊ីន 4T 0.8L',price:3.5,cur:'USD',cat:'ប្រេងម៉ាស៊ីន',stock:true,img:'',t:3},
+ {id:'s2',name:'សំបកកង់ក្រោយ 80/90-17',price:18,cur:'USD',cat:'សំបក',stock:true,img:'',t:2},
+ {id:'s3',name:'អំពូលមុខ LED',price:12,cur:'USD',cat:'អំពូល',stock:false,img:'',t:1}
 ];
 
 const $ = s => document.querySelector(s);
-const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const ALL = 'ទាំងអស់';
-const ico = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const LS = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
 
-/* ---------- Currency & Daily Exchange Rate ---------- */
-let cur = localStorage.getItem('jt_cur') || 'KHR'; // Default to Khmer Riel (៛)
-let rate = DEFAULT_RATE;
-
-const fmtUSD = n => '$' + (+n).toFixed(2).replace(/\.00$/, '');
-const fmtKHR = n => {
-  const r = Math.round((+n) * rate / 100) * 100;
-  return r.toLocaleString('en-US') + ' ៛';
-};
-const money = (usd, c = cur) => c === 'KHR' ? fmtKHR(usd) : fmtUSD(usd);
-const moneyBoth = usd => `${fmtKHR(usd)} (${fmtUSD(usd)})`;
-
-async function initRate(){
-  const today = new Date().toISOString().slice(0,10);
-  try{
-    const cached = JSON.parse(localStorage.getItem('jt_rate_cache'));
-    if(cached && cached.date === today && cached.rate > 3000){
-      rate = cached.rate;
-      updateRateUI();
-      refresh();
-      return;
-    }
-  }catch(e){}
-  const urls = [
-    'https://open.er-api.com/v6/latest/USD',
-    'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
+/* ---------- currency (KHR default, USD optional, live daily rate) ---------- */
+let cur = LS.get('jt_cur')==='USD' ? 'USD' : (LS.get('jt_cur')==='KHR' ? 'KHR' : DEFAULT_CUR);
+let rate = FALLBACK_RATE, rateDate = '', rateLive = false;
+const baseCur = p => p.cur==='KHR' ? 'KHR' : 'USD';           // older products (no cur) were priced in USD
+const conv = (v, from, to=cur) => from===to ? +v : (to==='USD' ? v/rate : Math.round(v*rate/100)*100);
+const fmt = (v, c=cur) => c==='USD' ? '$'+(+v).toFixed(2).replace(/\.00$/,'') : Math.round(v).toLocaleString('en-US')+'៛';
+const priceOf = p => conv(+p.price||0, baseCur(p));
+const money = p => fmt(priceOf(p));
+const other = c => c==='USD' ? 'KHR' : 'USD';
+function rateText(){
+  const r = '១$ = '+Math.round(rate).toLocaleString('en-US')+'៛';
+  return rateDate ? `${r} · ${rateDate}${rateLive?'':' (ចាស់)'}` : r+' (ប្រហាក់ប្រហែល)';
+}
+function paintCur(){
+  document.querySelectorAll('[data-cur]').forEach(b=>{ const on=b.dataset.cur===cur; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
+  document.querySelectorAll('.rt').forEach(el=>{ if(el.id!=='pconv') el.textContent=rateText(); });
+}
+function setCur(c){ cur=c; LS.set('jt_cur',c); paintCur(); refresh(); }
+async function loadRate(){
+  try{ const c=JSON.parse(LS.get('jt_rate')); if(c&&c.rate>0){ rate=c.rate; rateDate=c.date; } }catch(e){}
+  paintCur();
+  let fetchedAt=0; try{ fetchedAt=+JSON.parse(LS.get('jt_rate')).t||0; }catch(e){}
+  if(Date.now()-fetchedAt < 6*3600e3 && rateDate){ rateLive=true; paintCur(); return; }   // refresh at most every 6 h; sources update once a day
+  const sources=[
+    async()=>{ const j=await (await fetch('https://open.er-api.com/v6/latest/USD')).json(); if(j.result!=='success') throw 0; return {rate:j.rates.KHR, date:new Date(j.time_last_update_unix*1000).toLocaleDateString('en-GB')}; },
+    async()=>{ const j=await (await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json')).json(); return {rate:j.usd.khr, date:new Date(j.date).toLocaleDateString('en-GB')}; }
   ];
-  for(const u of urls){
-    try{
-      const res = await fetch(u);
-      if(!res.ok) continue;
-      const data = await res.json();
-      const fetched = data?.rates?.KHR || data?.usd?.khr;
-      if(fetched && fetched > 3000 && fetched < 6000){
-        rate = Math.round(fetched);
-        try{ localStorage.setItem('jt_rate_cache', JSON.stringify({date:today, rate})); }catch(e){}
-        break;
-      }
-    }catch(e){}
+  for(const s of sources){
+    try{ const r=await s(); if(r.rate>1000&&r.rate<10000){ rate=r.rate; rateDate=r.date; rateLive=true; LS.set('jt_rate',JSON.stringify({rate,date:rateDate,t:Date.now()})); paintCur(); refresh(); return; } }catch(e){}
   }
-  updateRateUI();
-  refresh();
+  rateLive=false; paintCur();
 }
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-cur]'); if(b) setCur(b.dataset.cur); });
 
-function updateRateUI(){
-  const txt = `អត្រាប្តូរប្រាក់ថ្ងៃនេះ៖ $1 = ${rate.toLocaleString('en-US')} ៛`;
-  if($('#rateInfo')) $('#rateInfo').textContent = txt;
-  if($('#admRate')) $('#admRate').textContent = txt;
-  $$('.cur-sw button').forEach(b => b.classList.toggle('on', b.dataset.cur === cur));
-}
-
-function setCur(newCur){
-  if(newCur !== 'KHR' && newCur !== 'USD') return;
-  cur = newCur;
-  try{ localStorage.setItem('jt_cur', cur); }catch(e){}
-  updateRateUI();
-  refresh();
-  if(!$('#modal').hidden) updateConvPv();
-}
-document.addEventListener('click', e => {
-  const b = e.target.closest('.cur-sw button');
-  if(b) setCur(b.dataset.cur);
-});
-
-/* ---------- Category SVG Art ---------- */
+const ALL = 'ទាំងអស់';
+const ico=n=>`<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const R=(n,f)=>[...Array(n)].map((_,i)=>f(i)).join('');
 const TIRE='<circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="42"/><circle cx="100" cy="100" r="10"/>'+R(5,i=>`<path transform="rotate(${i*72} 100 100)" d="M100 90V58"/>`);
 const GEAR=R(8,i=>`<path transform="rotate(${i*45} 100 100)" d="M93 54h14v16H93z"/>`)+'<circle cx="100" cy="100" r="38"/><circle cx="100" cy="100" r="14"/>';
@@ -284,22 +226,20 @@ function renderShop(){
    <article class="card ${p.stock?'':'out'}">
     <div class="im">${pic(p)}${p.stock?'':'<b class="tag">អស់ស្តុក</b>'}</div>
     <div class="bd"><small>${esc(p.cat)}</small><h3>${esc(p.name)}</h3>
-     <div class="row"><div class="pwrap"><span class="price num">${money(p.price)}</span><small class="subp">${money(p.price, cur==='KHR'?'USD':'KHR')}</small></div>${cart[p.id]?`<div class="step"><button data-m="${esc(p.id)}" aria-label="ដក">−</button><b>${cart[p.id]}</b><button data-p="${esc(p.id)}" aria-label="បន្ថែម">+</button></div>`:`<button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button>`}</div></div>
+     <div class="row"><span class="price num">${money(p)}</span>${cart[p.id]?`<div class="step"><button data-m="${esc(p.id)}" aria-label="ដក">−</button><b>${cart[p.id]}</b><button data-p="${esc(p.id)}" aria-label="បន្ថែម">+</button></div>`:`<button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button>`}</div></div>
    </article>`).join(''):'<div class="empty">រកមិនឃើញទំនិញទេ</div>';
 }
+function cartRows(){ return Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p&&r.p.stock).map(r=>({...r,unit:priceOf(r.p),amt:priceOf(r.p)*r.n})); }
 function renderCart(){
-  const rows=Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p&&r.p.stock);
+  const rows=cartRows();
   cart=Object.fromEntries(rows.map(r=>[r.p.id,r.n]));
-  const total=rows.reduce((s,r)=>s+r.p.price*r.n,0), cnt=rows.reduce((s,r)=>s+r.n,0);
-  $('#cc').textContent=cnt;
-  $('#cartTotal').innerHTML=`${money(total)} <small class="sub-tot">(${money(total, cur==='KHR'?'USD':'KHR')})</small>`;
-  const fb=$('#fab'); fb.hidden=!cnt; fb.innerHTML=`${ico('cart')}<span>${cnt} ទំនិញ · មើលកន្ត្រក</span><b>${money(total)}</b>`;
-  $('#order').disabled=!cnt;
-  $('#dlJpg').disabled=!cnt;
-  $('#dlPdf').disabled=!cnt;
+  const total=rows.reduce((s,r)=>s+r.amt,0), cnt=rows.reduce((s,r)=>s+r.n,0);
+  $('#cc').textContent=cnt; $('#cartTotal').textContent=fmt(total);
+  const fb=$('#fab'); fb.hidden=!cnt; fb.innerHTML=`${ico('cart')}<span>${cnt} ទំនិញ · មើលកន្ត្រក</span><b>${fmt(total)}</b>`;
+  $('#order').disabled=!cnt; $('#invjpg').disabled=!cnt; $('#invpdf').disabled=!cnt;
   $('#cartList').innerHTML=rows.length?rows.map(r=>`
-   <div class="ci"><div>${esc(r.p.name)}<em>${money(r.p.price*r.n)} <small>(${money(r.p.price*r.n, cur==='KHR'?'USD':'KHR')})</small></em></div>
-   <div class="step"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><b>${r.n}</b><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
+   <div class="ci"><div>${esc(r.p.name)}<em>${fmt(r.amt)}</em></div>
+   <div class="q"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><span>${r.n}</span><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
    :'<div class="empty" style="padding:40px 0">កន្ត្រកទទេ។ សូមជ្រើសរើសទំនិញ។</div>';
 }
 const cartOpen=on=>{ $('#drawer').classList.toggle('on',on); $('#veil').classList.toggle('on',on); };
@@ -327,7 +267,7 @@ function renderAdmin(){
   $('#aList').innerHTML=list.length?list.map(p=>`
    <div class="ar ${p.stock?'':'o'}">
     <div class="th">${pic(p)}</div>
-    <div class="ai"><b>${esc(p.name)}</b><span>${money(p.price)} (${money(p.price, cur==='KHR'?'USD':'KHR')}) · ${esc(p.cat)}</span></div>
+    <div class="ai"><b>${esc(p.name)}</b><span>${money(p)} · ${esc(p.cat)}</span></div>
     <label class="sw" title="មានស្តុក / អស់ស្តុក"><input type="checkbox" data-s="${esc(p.id)}" ${p.stock?'checked':''} aria-label="មានស្តុក"><i></i></label>
     <button class="ib" data-e="${esc(p.id)}">កែប្រែ</button><button class="ib d" data-d="${esc(p.id)}">លុប</button>
    </div>`).join(''):'<div class="empty" style="padding:40px 0">មិនទាន់មានទំនិញ។ ចុច «+ បន្ថែមទំនិញ» ដើម្បីចាប់ផ្តើម។</div>';
@@ -354,41 +294,18 @@ $('#login').onsubmit=async e=>{
 
 /* ---------- product form ---------- */
 const setPv=()=>{ $('#pv').innerHTML=pic({img,cat:$('#pc').value,name:''}); };
-$('#pc').onchange=setPv;
-$('#pu').oninput=e=>{ const v=e.target.value.trim(); img=/^https?:\/\//i.test(v)?v:''; setPv(); };
-
-function updateConvPv(){
-  const val = +$('#pp').value || 0;
-  const c = $('#pcur').value;
-  if(!val){ $('#convPv').textContent = ''; return; }
-  const usd = c === 'KHR' ? (val / rate) : val;
-  $('#convPv').textContent = c === 'KHR'
-    ? `≈ ${fmtUSD(usd)} (គណនាតាមអត្រា $1 = ${rate.toLocaleString('en-US')} ៛)`
-    : `≈ ${fmtKHR(usd)} (គណនាតាមអត្រា $1 = ${rate.toLocaleString('en-US')} ៛)`;
+function paintConv(){
+  const v=+$('#pp').value, from=$('#pcur').value, to=other(from);
+  $('#pconv').textContent=v>0?`≈ ${fmt(conv(v,from,to),to)}`:'';
 }
-$('#pp').oninput = updateConvPv;
-$('#pcur').onchange = () => {
-  const val = +$('#pp').value || 0;
-  if(val){
-    if($('#pcur').value === 'KHR') $('#pp').value = Math.round(val * rate / 100) * 100;
-    else $('#pp').value = +(val / rate).toFixed(2);
-  }
-  updateConvPv();
-};
-
+$('#pc').onchange=setPv;
+$('#pp').oninput=paintConv; $('#pcur').onchange=paintConv;
+$('#pu').oninput=e=>{ const v=e.target.value.trim(); img=/^https?:\/\//i.test(v)?v:''; setPv(); };
 function openForm(id){
   const p=items.find(x=>x.id===id); editId=p?p.id:null; img=p?p.img||'':'';
   $('#mTitle').textContent=p?'កែប្រែទំនិញ':'បន្ថែមទំនិញ';
-  $('#pn').value=p?p.name:'';
-  $('#pcur').value=cur;
-  if(p){
-    $('#pp').value = cur === 'KHR' ? (Math.round(p.price * rate / 100) * 100) : p.price;
-  }else{
-    $('#pp').value = '';
-  }
-  updateConvPv();
-  $('#pc').value=p?p.cat:CATS[0];
-  $('#ps').checked=p?!!p.stock:true; $('#pf').value=''; $('#pu').value=/^http/.test(img)?img:''; setPv();
+  $('#pn').value=p?p.name:''; $('#pp').value=p?p.price:''; $('#pcur').value=p?baseCur(p):cur; $('#pc').value=p?p.cat:CATS[0];
+  $('#ps').checked=p?!!p.stock:true; $('#pf').value=''; $('#pu').value=/^http/.test(img)?img:''; setPv(); paintConv();
   $('#modal').hidden=false; $('#pn').focus();
 }
 const closeForm=()=>{ $('#modal').hidden=true; };
@@ -408,143 +325,89 @@ $('#pf').onchange=e=>{
 $('#pform').onsubmit=async e=>{
   e.preventDefault();
   const old=items.find(x=>x.id===editId);
-  const rawPrice = +$('#pp').value || 0;
-  const priceUSD = $('#pcur').value === 'KHR' ? +(rawPrice / rate).toFixed(4) : rawPrice;
-  const p={id:editId||'p'+Date.now().toString(36), name:$('#pn').value.trim(), price:priceUSD, cat:$('#pc').value, stock:$('#ps').checked, img, t:old?.t||Date.now()};
+  const p={id:editId||'p'+Date.now().toString(36), name:$('#pn').value.trim(), price:+$('#pp').value||0, cur:$('#pcur').value, cat:$('#pc').value, stock:$('#ps').checked, img, t:old?.t||Date.now()};
   await DB.save(p); closeForm(); toast('បានរក្សាទុក ✓');
 };
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeForm(); cartOpen(false); } });
 
-/* ---------- call sheet + Direct Telegram order + Optional JPG/PDF Invoice ---------- */
+/* ---------- call sheet + Telegram order ---------- */
 const fmtPh=p=>p.replace(/(\d{3})(\d{3})(\d{3})/,'$1 $2 $3');
-const saveFile=(u,n)=>{ const a=document.createElement('a'); a.href=u; a.download=n; document.body.appendChild(a); a.click(); a.remove(); };
 $('#callBtn').onclick=()=>{ $('#callList').innerHTML=SHOP.phones.map(p=>`<a class="btn call" href="tel:${p}">${ico('call')} ${fmtPh(p)}</a>`).join(''); $('#callm').hidden=false; };
 $('#callx').onclick=()=>{ $('#callm').hidden=true; };
 $('#fab').onclick=()=>cartOpen(true);
-
-const BOT=!!(ORDER.botToken&&ORDER.chatId);
-$('#hint').textContent=BOT?'ការកម្មង់នឹងផ្ញើទៅហាងភ្លាមៗ':'Telegram នឹងបើកជាមួយសារដែលរៀបចំរួច — គ្រាន់តែចុចផ្ញើ';
-
 function buildOrder(){
-  const rows=Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p);
-  const total=rows.reduce((s,r)=>s+r.p.price*r.n,0), nm=$('#cn').value.trim(), ph=$('#cp').value.trim();
-  return [
-    '🛒 ការកម្មង់ថ្មី · '+SHOP.name,
-    '',
-    ...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${money(r.p.price*r.n)}`),
-    '',
-    `💰 សរុប៖ ${moneyBoth(total)}`,
-    ...(nm?['👤 '+nm]:[]),
-    ...(ph?['📞 '+ph]:[])
-  ].join('
-');
+  const rows=cartRows(), total=rows.reduce((s,r)=>s+r.amt,0), nm=$('#cn').value.trim(), ph=$('#cp').value.trim(), o=other(cur);
+  return ['🛒 ការកម្មង់ថ្មី · '+SHOP.name,'',...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${fmt(r.amt)}`),'','💰 សរុប៖ '+fmt(total)+` (≈ ${fmt(conv(total,cur,o),o)})`,...(nm?['👤 '+nm]:[]),...(ph?['📞 '+ph]:[])].join('\n');
 }
-
-$('#order').onclick=async()=>{
-  if(!Object.keys(cart).length) return;
-  const text=buildOrder(), btn=$('#order');
-  if(!BOT){ window.open('https://t.me/'+SHOP.telegram+'?text='+encodeURIComponent(text),'_blank','noopener'); return; }
-  if(!$('#cp').value.trim()){ toast('សូមបញ្ចូលលេខទូរសព្ទរបស់អ្នក'); $('#cp').focus(); return; }
-  btn.disabled=true;
-  try{
-    const r=await fetch(`https://api.telegram.org/bot${ORDER.botToken}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:ORDER.chatId,text})});
-    if(!r.ok) throw new Error(r.status);
-    cart={}; refresh(); cartOpen(false); toast('✓ បានផ្ញើការកម្មង់ហើយ! យើងនឹងទាក់ទងអ្នកឆាប់ៗ');
-  }catch(e){ console.error(e); btn.disabled=false; toast('ផ្ញើមិនបាន — សូមព្យាយាមម្តងទៀត'); }
+// Opens Telegram with the message typed in — the customer taps Send. Nothing is sent automatically.
+$('#order').onclick=()=>{
+  if(!cartRows().length) return;
+  window.open('https://t.me/'+SHOP.telegram+'?text='+encodeURIComponent(buildOrder()),'_blank','noopener');
 };
 
-/* ---------- Optional Invoice Generator (JPG / PDF) ---------- */
-async function renderInvoiceCanvas(){
-  const rows=Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p);
-  try{ await Promise.all([['400 20px "Kantumruy Pro"','កខ'],['700 20px "Kantumruy Pro"','កខ'],['500 20px Oswald','1A'],['700 32px Oswald','1A']].map(a=>document.fonts.load(...a))); }catch(e){}
-  const W=800, RH=58, H=rows.length*RH+580, c=document.createElement('canvas'); c.width=W; c.height=H;
+/* ---------- optional invoice save (JPG / PDF) ---------- */
+const save=(u,n)=>{ const a=document.createElement('a'); a.href=u; a.download=n; document.body.appendChild(a); a.click(); a.remove(); };
+async function makeInvoice(){
+  const rows=cartRows();
+  try{ await Promise.all([['400 20px "Kantumruy Pro"','កខ'],['700 20px "Kantumruy Pro"','កខ'],['500 20px Oswald','1A'],['700 36px Oswald','1A']].map(a=>document.fonts.load(...a))); }catch(e){}
+  const W=800,RH=56,H=rows.length*RH+600,c=document.createElement('canvas'); c.width=W; c.height=H;
   const x=c.getContext('2d'), F=(w,s,f='Kantumruy Pro')=>{ x.font=`${w} ${s}px "${f}",sans-serif`; };
   const T=(t,px,py,al='left',col='#333')=>{ x.textAlign=al; x.fillStyle=col; x.fillText(t,px,py); };
   x.textBaseline='middle'; x.fillStyle='#fff'; x.fillRect(0,0,W,H);
-  x.fillStyle='#121214'; x.fillRect(0,0,W,124); x.fillStyle='#d4a62a'; x.fillRect(0,124,W,6);
-  F(700,40); T(SHOP.name,40,48,'left','#f0c54a'); F(400,20); T(SHOP.tagline,40,90,'left','#d8d8de');
+  x.fillStyle='#121214'; x.fillRect(0,0,W,124); x.fillStyle='#c59b27'; x.fillRect(0,124,W,6);
+  F(700,40); T(SHOP.name,40,48,'left','#e0b63f'); F(400,20); T(SHOP.tagline,40,90,'left','#d8d8de');
   F(700,36,'Oswald'); T('INVOICE',W-40,48,'right','#fff'); F(400,20); T('វិក្កយបត្រ',W-40,90,'right','#d8d8de');
   const d=new Date(), p2=n=>String(n).padStart(2,'0');
   const no='INV-'+String(d.getFullYear()).slice(2)+p2(d.getMonth()+1)+p2(d.getDate())+'-'+p2(d.getHours())+p2(d.getMinutes());
-  F(400,19); T('លេខ៖ '+no,40,164); T('កាលបរិច្ឆេទ៖ '+d.toLocaleDateString('en-GB')+' '+p2(d.getHours())+':'+p2(d.getMinutes()),40,194);
-  T(`អត្រាប្តូរប្រាក់៖ $1 = ${rate.toLocaleString('en-US')} ៛`, W-40, 164, 'right', '#555');
-  const cu=[$('#cn').value.trim(), $('#cp').value.trim()].filter(Boolean).join(' · ');
-  if(cu) T('អតិថិជន៖ '+cu,40,224);
+  F(400,20); T('លេខ៖ '+no,40,166); T('កាលបរិច្ឆេទ៖ '+d.toLocaleDateString('en-GB')+' '+p2(d.getHours())+':'+p2(d.getMinutes()),40,198);
+  const cn=$('#cn').value.trim(), cp=$('#cp').value.trim(), cu=[cn,cp].filter(Boolean).join(' · ');
+  if(cu) T('អតិថិជន៖ '+cu,40,230);
   x.fillStyle='#f1f1f4'; x.fillRect(40,256,720,46);
-  F(700,18); T('#',56,279); T('ទំនិញ',90,279); T('ចំនួន',490,279,'right'); T('តម្លៃ',620,279,'right'); T('សរុប',750,279,'right');
+  F(700,18); T('#',56,279); T('ទំនិញ',90,279); T('ចំនួន',470,279,'right'); T('តម្លៃ',620,279,'right'); T('សរុប',760,279,'right');
   let total=0;
   rows.forEach((r,i)=>{
-    const y=302+i*RH+RH/2, amt=r.p.price*r.n; total+=amt;
-    let t=r.p.name; F(400,19); while(x.measureText(t).width>350&&t.length>1) t=t.slice(0,-1); if(t!==r.p.name) t+='…';
-    T(String(i+1),56,y); T(t,90,y); F(500,19,'Oswald'); T('x'+r.n,490,y,'right');
-    F(600,18); T(money(r.p.price),620,y,'right'); T(money(amt),750,y,'right','#111');
+    const y=302+i*RH+RH/2; total+=r.amt;
+    let t=r.p.name; F(400,19); while(x.measureText(t).width>330&&t.length>1) t=t.slice(0,-1); if(t!==r.p.name) t+='…';
+    T(String(i+1),56,y); T(t,90,y); F(500,20,'Oswald'); T('x'+r.n,470,y,'right'); T(fmt(r.unit),620,y,'right'); T(fmt(r.amt),760,y,'right','#111');
     x.fillStyle='#e5e5ea'; x.fillRect(40,302+(i+1)*RH-1,720,1);
   });
-  const ty=302+rows.length*RH+24;
-  x.fillStyle='#121214'; x.fillRect(360,ty,400,82);
-  F(700,22); T('សរុប',384,ty+28,'left','#fff');
-  F(700,26); T(fmtKHR(total),740,ty+26,'right','#f0c54a');
-  F(500,18,'Oswald'); T(fmtUSD(total),740,ty+58,'right','#d8d8de');
-  F(400,18); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+130); T('ទូរសព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+162); T('Telegram: @'+SHOP.telegram,40,ty+192);
+  const ty=302+rows.length*RH+28, o=other(cur);
+  x.fillStyle='#121214'; x.fillRect(400,ty,360,70); F(700,22); T('សរុប',424,ty+35,'left','#fff'); F(700,34,'Oswald'); T(fmt(total),736,ty+35,'right','#e0b63f');
+  F(400,17); T(rateText(),40,ty+100,'left','#777'); T('≈ '+fmt(conv(total,cur,o),o),760,ty+100,'right','#777');
+  F(400,19); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+156); T('ទូរសព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+192); T('Telegram: @'+SHOP.telegram,40,ty+224);
   const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.92));
-  return {blob, w:W, h:H, no};
+  return {blob,url:URL.createObjectURL(blob),w:W,h:H,no};
 }
-
 function pdfParts(j,w,h){
   const E=new TextEncoder(), W=595, H=Math.round(W*h/w), ct=`q ${W} 0 0 ${H} 0 0 cm /I Do Q`;
   const objs=['<</Type/Catalog/Pages 2 0 R>>','<</Type/Pages/Kids[3 0 R]/Count 1>>',
    `<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${W} ${H}]/Resources<</XObject<</I 4 0 R>>>>/Contents 5 0 R>>`,
-   [`<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${j.length}>>
-stream
-`,j,'
-endstream'],
-   `<</Length ${ct.length}>>
-stream
-${ct}
-endstream`];
-  const out=[E.encode('%PDF-1.4
-')], offs=[]; let pos=out[0].length;
-  objs.forEach((o,i)=>{ offs.push(pos); [`${i+1} 0 obj
-`,...[].concat(o),'
-endobj
-'].map(q=>typeof q==='string'?E.encode(q):q).forEach(q=>{ out.push(q); pos+=q.length; }); });
-  out.push(E.encode('xref
-0 6
-0000000000 65535 f 
-'+offs.map(o=>String(o).padStart(10,'0')+' 00000 n 
-').join('')+`trailer
-<</Size 6/Root 1 0 R>>
-startxref
-${pos}
-%%EOF`));
+   [`<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${j.length}>>\nstream\n`,j,'\nendstream'],
+   `<</Length ${ct.length}>>\nstream\n${ct}\nendstream`];
+  const out=[E.encode('%PDF-1.4\n')], offs=[]; let pos=out[0].length;
+  objs.forEach((o,i)=>{ offs.push(pos); [`${i+1} 0 obj\n`,...[].concat(o),'\nendobj\n'].map(q=>typeof q==='string'?E.encode(q):q).forEach(q=>{ out.push(q); pos+=q.length; }); });
+  out.push(E.encode('xref\n0 6\n0000000000 65535 f \n'+offs.map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${pos}\n%%EOF`));
   return out;
 }
-
-$('#dlJpg').onclick=async()=>{
-  if(!Object.keys(cart).length) return;
-  toast('កំពុងរក្សាទុករូបភាព...');
+async function saveInvoice(kind){
+  if(!cartRows().length) return;
+  toast('កំពុងបង្កើតវិក្កយបត្រ...');
   try{
-    const inv = await renderInvoiceCanvas();
-    const u = URL.createObjectURL(inv.blob);
-    saveFile(u, inv.no+'.jpg');
-    setTimeout(()=>URL.revokeObjectURL(u), 5000);
-  }catch(e){ console.error(e); toast('មិនអាចបង្កើតវិក្កយបត្របានទេ'); }
-};
+    const inv=await makeInvoice();
+    if(kind==='jpg'){ save(inv.url,inv.no+'.jpg'); setTimeout(()=>URL.revokeObjectURL(inv.url),8000); }
+    else{
+      const b=new Uint8Array(await inv.blob.arrayBuffer());
+      const u=URL.createObjectURL(new Blob(pdfParts(b,inv.w,inv.h),{type:'application/pdf'}));
+      save(u,inv.no+'.pdf'); setTimeout(()=>{ URL.revokeObjectURL(u); URL.revokeObjectURL(inv.url); },8000);
+    }
+    toast('បានរក្សាទុកវិក្កយបត្រ ✓');
+  }catch(e){ console.error(e); toast('Cannot create invoice'); }
+}
+$('#invjpg').onclick=()=>saveInvoice('jpg');
+$('#invpdf').onclick=()=>saveInvoice('pdf');
 
-$('#dlPdf').onclick=async()=>{
-  if(!Object.keys(cart).length) return;
-  toast('កំពុងរក្សាទុក PDF...');
-  try{
-    const inv = await renderInvoiceCanvas();
-    const b = new Uint8Array(await inv.blob.arrayBuffer());
-    const u = URL.createObjectURL(new Blob(pdfParts(b,inv.w,inv.h),{type:'application/pdf'}));
-    saveFile(u, inv.no+'.pdf');
-    setTimeout(()=>URL.revokeObjectURL(u), 5000);
-  }catch(e){ console.error(e); toast('មិនអាចបង្កើត PDF បានទេ'); }
-};
-
-$$('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.hidden=true; }));
-addEventListener('keydown',e=>{ if(e.key==='Escape') $$('.modal').forEach(m=>{ m.hidden=true; }); });
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.hidden=true; }));
+addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal').forEach(m=>{ m.hidden=true; }); });
 
 /* ---------- boot ---------- */
 function refresh(){ renderShop(); renderCart(); if(!$('#admin').hidden) renderAdmin(); }
@@ -553,8 +416,8 @@ $('#sName').textContent=SHOP.name; $('#sTag').textContent=SHOP.tagline; $('#fNam
 $('#tgBtn').href='https://t.me/'+SHOP.telegram;
 $('#pc').innerHTML=CATS.map(c=>`<option>${esc(c)}</option>`).join('');
 $('#af').innerHTML='<option value="">ប្រភេទទាំងអស់</option>'+CATS.map(c=>`<option>${esc(c)}</option>`).join('');
-updateRateUI(); renderCats(); renderCart(); $('#grid').innerHTML=R(6,()=>'<div class="skel"></div>'); addEventListener('hashchange',route); route();
-initRate();
+renderCats(); renderCart(); paintCur(); $('#grid').innerHTML=R(6,()=>'<div class="skel"></div>'); addEventListener('hashchange',route); route();
+loadRate().then(refresh);
 DB.init(refresh);
 </script>
 </body>
