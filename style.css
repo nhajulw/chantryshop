@@ -1,193 +1,465 @@
-/* ===== ជាងទ្រី shop — style.css ===== */
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0f12">
+<title>ជាងទ្រី - លក់គ្រឿងបន្លាស់ម៉ូតូ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-tg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+<symbol id="i-call" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></symbol>
+</svg>
 
-/* 1. Tokens */
-:root{
-  --bg:#0f0f12; --surface:#18181d; --raised:#212128; --line:#2c2c35;
-  --txt:#f4f4f6; --mute:#9d9da8;
-  --gold:#d4a62a; --gold-hi:#f0c54a; --on-gold:#1b1503;
-  --tg:#229ed9; --call:#1f9d63; --red:#ef5b52; --ok:#3fbf86;
-  --r:16px; --ease:cubic-bezier(.2,.8,.2,1);
-  --safe:env(safe-area-inset-bottom,0px);
+<!-- ===== SHOP ===== -->
+<div id="shop">
+  <header class="top">
+    <div class="logo">🏍️</div>
+    <div class="brand"><h1 id="sName"></h1><p id="sTag"></p></div>
+    <div class="curs" role="group" aria-label="រូបិយប័ណ្ណ"><button data-cur="KHR" aria-label="Riel">៛</button><button data-cur="USD" aria-label="US Dollar">$</button></div>
+    <button class="cartbtn" id="openCart" aria-label="កន្ត្រក"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><b id="cc">0</b></button>
+  </header>
+  <section class="hero">
+    <svg class="spin" viewBox="0 0 200 200" aria-hidden="true"><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(0 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(30 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(60 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(90 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(120 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(150 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(180 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(210 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(240 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(270 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(300 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(330 100 100)"/><circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="34"/><circle cx="100" cy="100" r="8"/></svg>
+    <h2>គ្រឿងបន្លាស់ម៉ូតូ គុណភាពល្អ តម្លៃសមរម្យ</h2>
+    <p>ជ្រើសរើសទំនិញ បន្ថែមទៅកន្ត្រក រួចផ្ញើការកម្មង់មកយើងតាម Telegram បានភ្លាមៗ។</p>
+    <div class="cta"><button class="btn call" id="callBtn"><svg class="ic" aria-hidden="true"><use href="#i-call"/></svg> ទូរសព្ទមកហាង</button><a class="btn tg" id="tgBtn" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> Telegram</a></div>
+  </section>
+  <div class="tools">
+    <div class="sbox"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><input class="search" id="q" type="search" placeholder="ស្វែងរកគ្រឿងបន្លាស់..." aria-label="ស្វែងរក"></div>
+    <div class="cats" id="cats"></div>
+  </div>
+  <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
+  <button class="fab" id="fab" hidden></button>
+  <footer><span id="fName"></span><span class="rt"></span><a href="#admin">ទំព័រគ្រប់គ្រង</a></footer>
+</div>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="កន្ត្រក">
+  <div class="dh"><span>កន្ត្រករបស់អ្នក</span><button class="x" id="closeCart" aria-label="បិទ">×</button></div>
+  <div class="dl" id="cartList"></div>
+  <div class="df">
+    <div class="two"><input class="in" id="cn" type="text" placeholder="ឈ្មោះ" maxlength="40" autocomplete="name"><input class="in" id="cp" type="tel" placeholder="លេខទូរសព្ទ" maxlength="20" inputmode="tel" autocomplete="tel"></div>
+    <input class="in" id="ct" type="text" placeholder="Telegram @username (ស្រេចចិត្ត)" maxlength="33" autocomplete="off" autocapitalize="none" spellcheck="false">
+    <div class="tot"><span>សរុប</span><span id="cartTotal">0៛</span></div>
+    <p class="hint rt"></p>
+    <button class="btn tg wide" id="order"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> ផ្ញើការកម្មង់ទៅ Telegram</button>
+    <p class="hint">ការកម្មង់ត្រូវបានផ្ញើទៅហាងដោយស្វ័យប្រវត្តិ ហើយ Telegram នឹងបើកសារដែលរៀបចំរួច — សូមចុចផ្ញើផងដែរ</p>
+    <div class="two"><button class="btn sec" id="invjpg"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> JPG</button><button class="btn sec" id="invpdf"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> PDF</button></div>
+    <p class="hint">រក្សាទុកវិក្កយបត្រ (ស្រេចចិត្ត) — មិនផ្ញើដោយស្វ័យប្រវត្តិទេ</p>
+  </div>
+</aside>
+
+<!-- ===== ADMIN ===== -->
+<div id="admin" hidden>
+  <div class="adm">
+    <div class="ah"><h2>ទំព័រគ្រប់គ្រង</h2><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><div class="curs" role="group" aria-label="រូបិយប័ណ្ណ"><button data-cur="KHR" aria-label="Riel">៛</button><button data-cur="USD" aria-label="US Dollar">$</button></div><a class="btn sec" href="#">← ត្រឡប់ទៅហាង</a><button class="btn sec" id="logout" hidden>ចាកចេញ</button></div></div>
+    <form id="login" class="form f" hidden style="margin:40px auto;border-radius:24px">
+      <h3>ចូលគណនី</h3>
+      <div class="f"><label for="em">អ៊ីមែល</label><input class="in" id="em" type="email" required autocomplete="username"></div>
+      <div class="f"><label for="pw">លេខសម្ងាត់</label><input class="in" id="pw" type="password" required autocomplete="current-password"></div>
+      <div class="err" id="lerr"></div>
+      <button class="btn pri">ចូល</button>
+    </form>
+    <div id="dash">
+      <div class="note" id="demo" hidden>Demo mode: changes are saved on this device only. Add your Firebase config to go live for all visitors.</div>
+      <div class="stats">
+        <div class="st"><b id="s1">0</b><span>ទំនិញសរុប</span></div>
+        <div class="st"><b id="s2">0</b><span>មានស្តុក</span></div>
+        <div class="st o"><b id="s3">0</b><span>អស់ស្តុក</span></div>
+      </div>
+      <p class="rt" style="margin-bottom:12px"></p>
+      <button class="btn pri" id="addNew">+ បន្ថែមទំនិញ</button>
+      <div class="flt"><input class="search" id="aq" type="search" placeholder="ស្វែងរកទំនិញ..."><select id="af" class="sel" aria-label="ប្រភេទ"></select></div>
+      <div id="aList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- modals -->
+<div class="modal" id="modal" hidden>
+  <form class="form f" id="pform">
+    <h3 id="mTitle">បន្ថែមទំនិញ</h3>
+    <div class="f"><label for="pn">ឈ្មោះទំនិញ</label><input class="in" id="pn" type="text" required maxlength="80"></div>
+    <div class="f"><label for="pp">តម្លៃ</label>
+      <div class="prow"><input class="in" id="pp" type="number" step="any" min="0" required inputmode="decimal"><select class="sel" id="pcur" aria-label="រូបិយប័ណ្ណ"><option value="KHR">៛ រៀល</option><option value="USD">$ ដុល្លារ</option></select></div>
+      <small class="rt" id="pconv" style="display:block;margin-top:5px"></small></div>
+    <div class="f"><label for="pc">ប្រភេទ</label><select class="sel" id="pc"></select></div>
+    <div class="f"><label>រូបភាព (កាត់ជាការ៉េ 1:1 ដោយស្វ័យប្រវត្តិ)</label>
+      <div class="up"><div class="pv" id="pv"></div>
+        <div style="display:grid;gap:8px"><input type="file" id="pf" accept="image/*" style="font-size:13px"><button type="button" class="ib" id="pclr">លុបរូបភាព</button></div></div>
+      <input class="in" type="text" id="pu" placeholder="ឬបិទភ្ជាប់តំណរូបភាព https://..." style="margin-top:10px"></div>
+    <label class="chk"><span class="sw"><input type="checkbox" id="ps" checked><i></i></span> មានស្តុក</label>
+    <div class="acts"><button type="button" class="btn sec" id="mcancel">បោះបង់</button><button class="btn pri">រក្សាទុក</button></div>
+  </form>
+</div>
+<div class="modal" id="callm" hidden><div class="form f"><h3>ទូរសព្ទមកហាង</h3><div class="callrow" id="callList"></div><button class="btn sec" id="callx">បិទ</button></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script type="module">
+/* =====================  SETTINGS — edit these  ===================== */
+const SHOP = { name:'ជាងទ្រី', tagline:'លក់គ្រឿងបន្លាស់ម៉ូតូ', phones:['070289000','090289000'], telegram:'MR_CHANTRY007' };
+const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';   // Cloudflare Worker that forwards orders to your bot
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyA0jKf5ddks3xa2I5UaaZ2IxUfezi-0LAg",
+  authDomain: "cheangtry-9149b.firebaseapp.com",
+  projectId: "cheangtry-9149b",
+  storageBucket: "cheangtry-9149b.firebasestorage.app",
+  messagingSenderId: "410063645368",
+  appId: "1:410063645368:web:ce9dcbc71b4bf20279624d"
+};
+const CATS = ['សំបក','ពោះវៀន','ច្រវ៉ាក់ឈុត','ខ្ចៅ','អំពូល','កុងតាក់','គ្រឿងជ័រ','គ្រឿងក្រៅ','ប្រេងម៉ាស៊ីន','ផ្សេងៗ'];
+const DEFAULT_CUR = 'KHR';          // site default currency: 'KHR' or 'USD'
+const FALLBACK_RATE = 4100;         // used only if the live rate can't be loaded and nothing is cached
+/* ================================================================== */
+
+const SEED = [
+ {id:'s1',name:'ប្រេងម៉ាស៊ីន 4T 0.8L',price:3.5,cur:'USD',cat:'ប្រេងម៉ាស៊ីន',stock:true,img:'',t:3},
+ {id:'s2',name:'សំបកកង់ក្រោយ 80/90-17',price:18,cur:'USD',cat:'សំបក',stock:true,img:'',t:2},
+ {id:'s3',name:'អំពូលមុខ LED',price:12,cur:'USD',cat:'អំពូល',stock:false,img:'',t:1}
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
+
+/* ---------- currency (KHR default, USD optional, live daily rate) ---------- */
+let cur = LS.get('jt_cur')==='USD' ? 'USD' : (LS.get('jt_cur')==='KHR' ? 'KHR' : DEFAULT_CUR);
+let rate = FALLBACK_RATE, rateDate = '', rateLive = false;
+const baseCur = p => p.cur==='KHR' ? 'KHR' : 'USD';           // older products (no cur) were priced in USD
+const conv = (v, from, to=cur) => from===to ? +v : (to==='USD' ? v/rate : Math.round(v*rate/100)*100);
+const fmt = (v, c=cur) => c==='USD' ? '$'+(+v).toFixed(2).replace(/\.00$/,'') : Math.round(v).toLocaleString('en-US')+'៛';
+const priceOf = p => conv(+p.price||0, baseCur(p));
+const money = p => fmt(priceOf(p));
+const other = c => c==='USD' ? 'KHR' : 'USD';
+function rateText(){
+  const r = '១$ = '+Math.round(rate).toLocaleString('en-US')+'៛';
+  return rateDate ? `${r} · ${rateDate}${rateLive?'':' (ចាស់)'}` : r+' (ប្រហាក់ប្រហែល)';
+}
+function paintCur(){
+  document.querySelectorAll('[data-cur]').forEach(b=>{ const on=b.dataset.cur===cur; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
+  document.querySelectorAll('.rt').forEach(el=>{ if(el.id!=='pconv') el.textContent=rateText(); });
+}
+function setCur(c){ cur=c; LS.set('jt_cur',c); paintCur(); refresh(); }
+async function loadRate(){
+  try{ const c=JSON.parse(LS.get('jt_rate')); if(c&&c.rate>0){ rate=c.rate; rateDate=c.date; } }catch(e){}
+  paintCur();
+  let fetchedAt=0; try{ fetchedAt=+JSON.parse(LS.get('jt_rate')).t||0; }catch(e){}
+  if(Date.now()-fetchedAt < 6*3600e3 && rateDate){ rateLive=true; paintCur(); return; }   // refresh at most every 6 h; sources update once a day
+  const sources=[
+    async()=>{ const j=await (await fetch('https://open.er-api.com/v6/latest/USD')).json(); if(j.result!=='success') throw 0; return {rate:j.rates.KHR, date:new Date(j.time_last_update_unix*1000).toLocaleDateString('en-GB')}; },
+    async()=>{ const j=await (await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json')).json(); return {rate:j.usd.khr, date:new Date(j.date).toLocaleDateString('en-GB')}; }
+  ];
+  for(const s of sources){
+    try{ const r=await s(); if(r.rate>1000&&r.rate<10000){ rate=r.rate; rateDate=r.date; rateLive=true; LS.set('jt_rate',JSON.stringify({rate,date:rateDate,t:Date.now()})); paintCur(); refresh(); return; } }catch(e){}
+  }
+  rateLive=false; paintCur();
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-cur]'); if(b) setCur(b.dataset.cur); });
+
+const ALL = 'ទាំងអស់';
+const ico=n=>`<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const R=(n,f)=>[...Array(n)].map((_,i)=>f(i)).join('');
+const TIRE='<circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="42"/><circle cx="100" cy="100" r="10"/>'+R(5,i=>`<path transform="rotate(${i*72} 100 100)" d="M100 90V58"/>`);
+const GEAR=R(8,i=>`<path transform="rotate(${i*45} 100 100)" d="M93 54h14v16H93z"/>`)+'<circle cx="100" cy="100" r="38"/><circle cx="100" cy="100" r="14"/>';
+const OIL='<rect x="84" y="44" width="32" height="14" rx="3"/><path d="M80 60h40v16l16 14v70a8 8 0 0 1-8 8H72a8 8 0 0 1-8-8V90l16-14z"/><path d="M84 116h32M84 136h32"/>';
+const ICON={'សំបក':TIRE,'ប្រេងម៉ាស៊ីន':OIL,'ខ្ចៅ':GEAR,'ផ្សេងៗ':GEAR,
+ 'ពោះវៀន':'<circle cx="100" cy="100" r="62"/><circle cx="100" cy="100" r="46"/><path d="M100 38v-14h12"/>',
+ 'ច្រវ៉ាក់ឈុត':R(4,i=>`<rect x="${22+i*38}" y="86" width="62" height="28" rx="14"/>`),
+ 'អំពូល':'<path d="M100 40a38 38 0 0 1 20 70v14H80v-14a38 38 0 0 1 20-70z"/><path d="M84 140h32M90 156h20"/>',
+ 'កុងតាក់':'<rect x="60" y="40" width="80" height="120" rx="14"/><rect x="86" y="62" width="28" height="48" rx="8"/><path d="M80 136h40"/>',
+ 'គ្រឿងជ័រ':'<path d="M44 132c10-50 52-70 112-60l-8 22c-40-4-60 12-70 52z"/><path d="M60 146h70"/>',
+ 'គ្រឿងក្រៅ':'<path d="M36 130c4-44 40-70 84-64 24 3 44 18 48 40l-30 4c-4-14-16-20-34-20-26 0-38 16-42 40z"/><circle cx="64" cy="144" r="12"/>'
+};
+const art=c=>'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#33333c"/><stop offset="1" stop-color="#1e1e24"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><g fill="none" stroke="#c59b27" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">${ICON[c]||ICON['ផ្សេងៗ']}</g></svg>`);
+const pic=p=>`<img src="${esc(p.img||art(p.cat))}" data-c="${esc(p.cat)}" alt="${esc(p.name)}" loading="lazy">`;
+document.addEventListener('error',e=>{ const t=e.target; if(t.tagName==='IMG'&&!t.dataset.f){ t.dataset.f=1; t.src=art(t.dataset.c); } },true);
+let items = [], cat = ALL, q = '', aq = '', af = '', cart = {}, editId = null, img = '';
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('on'),2600); }
+
+/* ---------- data layer (local demo OR Firebase) ---------- */
+const DB = {
+  fb:null, user:null,
+  async init(onChange){
+    if(!FIREBASE_CONFIG){
+      let l=null; try{ l=JSON.parse(localStorage.getItem('jt_products')); }catch(e){}
+      items = Array.isArray(l) ? l : SEED; onChange(); return;
+    }
+    try{
+      const V='10.12.2', base=`https://www.gstatic.com/firebasejs/${V}/`;
+      const [A,F,U] = await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-firestore.js'),import(base+'firebase-auth.js')]);
+      const app=A.initializeApp(FIREBASE_CONFIG), db=F.getFirestore(app), auth=U.getAuth(app);
+      this.fb={F,U,auth,col:F.collection(db,'products')};
+      U.onAuthStateChanged(auth,u=>{ this.user=u; if(!$('#admin').hidden) renderAdmin(); });
+      F.onSnapshot(this.fb.col,s=>{ items=s.docs.map(d=>({...d.data(),id:d.id})); onChange(); },e=>toast('Cannot load products: '+e.code));
+    }catch(e){ console.error(e); toast('Firebase error — check your config'); }
+  },
+  async save(p){
+    const i=items.findIndex(x=>x.id===p.id);
+    if(this.fb){ try{ await this.fb.F.setDoc(this.fb.F.doc(this.fb.col,p.id),p); }catch(e){ toast('Save failed: '+e.code); } return; }
+    if(i>=0) items[i]=p; else items.unshift(p);
+    this.persist();
+  },
+  async remove(id){
+    if(this.fb){ try{ await this.fb.F.deleteDoc(this.fb.F.doc(this.fb.col,id)); }catch(e){ toast('Delete failed: '+e.code); } return; }
+    items=items.filter(x=>x.id!==id); this.persist();
+  },
+  persist(){ try{ localStorage.setItem('jt_products',JSON.stringify(items)); }catch(e){ toast('Storage full — use smaller images'); } refresh(); }
+};
+
+/* ---------- shop ---------- */
+function renderCats(){
+  $('#cats').innerHTML=[ALL,...CATS].map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+}
+function renderShop(){
+  const list=items.filter(p=>(cat===ALL||p.cat===cat)&&p.name.toLowerCase().includes(q.toLowerCase()))
+    .sort((a,b)=>(+!!b.stock)-(+!!a.stock)||(b.t||0)-(a.t||0));
+  $('#count').textContent=`ទំនិញ ${list.length}`;
+  $('#grid').innerHTML=list.length?list.map(p=>`
+   <article class="card ${p.stock?'':'out'}">
+    <div class="im">${pic(p)}${p.stock?'':'<b class="tag">អស់ស្តុក</b>'}</div>
+    <div class="bd"><small>${esc(p.cat)}</small><h3>${esc(p.name)}</h3>
+     <div class="row"><span class="price num">${money(p)}</span>${cart[p.id]?`<div class="step"><button data-m="${esc(p.id)}" aria-label="ដក">−</button><b>${cart[p.id]}</b><button data-p="${esc(p.id)}" aria-label="បន្ថែម">+</button></div>`:`<button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button>`}</div></div>
+   </article>`).join(''):'<div class="empty">រកមិនឃើញទំនិញទេ</div>';
+}
+function cartRows(){ return Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p&&r.p.stock).map(r=>({...r,unit:priceOf(r.p),amt:priceOf(r.p)*r.n})); }
+function renderCart(){
+  const rows=cartRows();
+  cart=Object.fromEntries(rows.map(r=>[r.p.id,r.n]));
+  const total=rows.reduce((s,r)=>s+r.amt,0), cnt=rows.reduce((s,r)=>s+r.n,0);
+  $('#cc').textContent=cnt; $('#cartTotal').textContent=fmt(total);
+  const fb=$('#fab'); fb.hidden=!cnt; fb.innerHTML=`${ico('cart')}<span>${cnt} ទំនិញ · មើលកន្ត្រក</span><b>${fmt(total)}</b>`;
+  $('#order').disabled=!cnt; $('#invjpg').disabled=!cnt; $('#invpdf').disabled=!cnt;
+  $('#cartList').innerHTML=rows.length?rows.map(r=>`
+   <div class="ci"><div>${esc(r.p.name)}<em>${fmt(r.amt)}</em></div>
+   <div class="q"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><span>${r.n}</span><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
+   :'<div class="empty" style="padding:40px 0">កន្ត្រកទទេ។ សូមជ្រើសរើសទំនិញ។</div>';
+}
+const cartOpen=on=>{ $('#drawer').classList.toggle('on',on); $('#veil').classList.toggle('on',on); };
+
+$('#cats').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b)return; cat=b.dataset.c; renderCats(); renderShop(); };
+$('#q').oninput=e=>{ q=e.target.value; renderShop(); };
+const change=(id,d)=>{ cart[id]=(cart[id]||0)+d; if(cart[id]<=0) delete cart[id]; refresh(); for(const el of [$('#cc'),$('#fab')]){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); } };
+const cartClick=e=>{
+  const a=e.target.closest('.add'), m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
+  if(a&&!a.disabled){ change(a.dataset.id,1); toast('បានបន្ថែមទៅកន្ត្រក ✓'); }
+  else if(p) change(p.dataset.p,1);
+  else if(m) change(m.dataset.m,-1);
+};
+$('#grid').onclick=$('#cartList').onclick=cartClick;
+$('#openCart').onclick=()=>cartOpen(true); $('#closeCart').onclick=$('#veil').onclick=()=>cartOpen(false);
+
+/* ---------- admin ---------- */
+function renderAdmin(){
+  const need=!!DB.fb&&!DB.user;
+  $('#login').hidden=!need; $('#dash').hidden=need; $('#logout').hidden=!DB.user; $('#demo').hidden=!!DB.fb;
+  if(need) return;
+  const out=items.filter(p=>!p.stock).length;
+  $('#s1').textContent=items.length; $('#s2').textContent=items.length-out; $('#s3').textContent=out;
+  const list=items.filter(p=>(!af||p.cat===af)&&p.name.toLowerCase().includes(aq.toLowerCase())).sort((a,b)=>(b.t||0)-(a.t||0));
+  $('#aList').innerHTML=list.length?list.map(p=>`
+   <div class="ar ${p.stock?'':'o'}">
+    <div class="th">${pic(p)}</div>
+    <div class="ai"><b>${esc(p.name)}</b><span>${money(p)} · ${esc(p.cat)}</span></div>
+    <label class="sw" title="មានស្តុក / អស់ស្តុក"><input type="checkbox" data-s="${esc(p.id)}" ${p.stock?'checked':''} aria-label="មានស្តុក"><i></i></label>
+    <button class="ib" data-e="${esc(p.id)}">កែប្រែ</button><button class="ib d" data-d="${esc(p.id)}">លុប</button>
+   </div>`).join(''):'<div class="empty" style="padding:40px 0">មិនទាន់មានទំនិញ។ ចុច «+ បន្ថែមទំនិញ» ដើម្បីចាប់ផ្តើម។</div>';
+}
+$('#aq').oninput=e=>{ aq=e.target.value; renderAdmin(); };
+$('#af').onchange=e=>{ af=e.target.value; renderAdmin(); };
+$('#aList').onchange=async e=>{
+  const s=e.target.closest('[data-s]'); if(!s) return;
+  const p=items.find(x=>x.id===s.dataset.s); if(!p) return;
+  await DB.save({...p,stock:s.checked}); toast(s.checked?'មានស្តុក ✓':'សម្គាល់ថាអស់ស្តុក');
+};
+$('#aList').onclick=async e=>{
+  const ed=e.target.closest('[data-e]'), dl=e.target.closest('[data-d]');
+  if(ed) openForm(ed.dataset.e);
+  if(dl){ const p=items.find(x=>x.id===dl.dataset.d); if(p&&confirm(`លុប «${p.name}» មែនទេ?`)){ await DB.remove(p.id); toast('បានលុប'); } }
+};
+$('#addNew').onclick=()=>openForm();
+$('#logout').onclick=()=>DB.fb.U.signOut(DB.fb.auth);
+$('#login').onsubmit=async e=>{
+  e.preventDefault(); $('#lerr').textContent='';
+  try{ await DB.fb.U.signInWithEmailAndPassword(DB.fb.auth,$('#em').value,$('#pw').value); }
+  catch(err){ $('#lerr').textContent='អ៊ីមែល ឬលេខសម្ងាត់មិនត្រឹមត្រូវ'; }
+};
+
+/* ---------- product form ---------- */
+const setPv=()=>{ $('#pv').innerHTML=pic({img,cat:$('#pc').value,name:''}); };
+function paintConv(){
+  const v=+$('#pp').value, from=$('#pcur').value, to=other(from);
+  $('#pconv').textContent=v>0?`≈ ${fmt(conv(v,from,to),to)}`:'';
+}
+$('#pc').onchange=setPv;
+$('#pp').oninput=paintConv; $('#pcur').onchange=paintConv;
+$('#pu').oninput=e=>{ const v=e.target.value.trim(); img=/^https?:\/\//i.test(v)?v:''; setPv(); };
+function openForm(id){
+  const p=items.find(x=>x.id===id); editId=p?p.id:null; img=p?p.img||'':'';
+  $('#mTitle').textContent=p?'កែប្រែទំនិញ':'បន្ថែមទំនិញ';
+  $('#pn').value=p?p.name:''; $('#pp').value=p?p.price:''; $('#pcur').value=p?baseCur(p):cur; $('#pc').value=p?p.cat:CATS[0];
+  $('#ps').checked=p?!!p.stock:true; $('#pf').value=''; $('#pu').value=/^http/.test(img)?img:''; setPv(); paintConv();
+  $('#modal').hidden=false; $('#pn').focus();
+}
+const closeForm=()=>{ $('#modal').hidden=true; };
+$('#mcancel').onclick=closeForm;
+$('#modal').onclick=e=>{ if(e.target.id==='modal') closeForm(); };
+$('#pclr').onclick=()=>{ img=''; $('#pf').value=''; $('#pu').value=''; setPv(); };
+$('#pf').onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ const im=new Image(); im.onload=()=>{
+      const m=480, s=Math.min(im.width,im.height), c=document.createElement('canvas'); c.width=c.height=m;
+      c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,m,m);
+      img=c.toDataURL('image/jpeg',.75); $('#pu').value=''; setPv();
+    }; im.onerror=()=>toast('Cannot read this image'); im.src=r.result; };
+  r.readAsDataURL(f);
+};
+$('#pform').onsubmit=async e=>{
+  e.preventDefault();
+  const old=items.find(x=>x.id===editId);
+  const p={id:editId||'p'+Date.now().toString(36), name:$('#pn').value.trim(), price:+$('#pp').value||0, cur:$('#pcur').value, cat:$('#pc').value, stock:$('#ps').checked, img, t:old?.t||Date.now()};
+  await DB.save(p); closeForm(); toast('បានរក្សាទុក ✓');
+};
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeForm(); cartOpen(false); } });
+
+/* ---------- call sheet + Telegram order ---------- */
+const fmtPh=p=>p.replace(/(\d{3})(\d{3})(\d{3})/,'$1 $2 $3');
+$('#callBtn').onclick=()=>{ $('#callList').innerHTML=SHOP.phones.map(p=>`<a class="btn call" href="tel:${p}">${ico('call')} ${fmtPh(p)}</a>`).join(''); $('#callm').hidden=false; };
+$('#callx').onclick=()=>{ $('#callm').hidden=true; };
+$('#fab').onclick=()=>cartOpen(true);
+
+function buildOrder(){
+  const rows=cartRows(), total=rows.reduce((s,r)=>s+r.amt,0), o=other(cur);
+  const nm=$('#cn').value.trim(), ph=$('#cp').value.trim();
+  const tg=$('#ct').value.trim().replace(/^https?:\/\/t\.me\//i,'').replace(/[^A-Za-z0-9_]/g,'');
+  return ['🛒 ការកម្មង់ថ្មី · '+SHOP.name,'',
+    ...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${fmt(r.amt)}`),'',
+    '💰 សរុប៖ '+fmt(total)+` (≈ ${fmt(conv(total,cur,o),o)})`,'',
+    '👤 '+nm,
+    '📞 '+ph,
+    ...(tg?['✈️ Telegram: @'+tg]:[])
+  ].join('\n');
 }
 
-/* 2. Base */
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:'Kantumruy Pro',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-tap-highlight-color:transparent}
-button,input,select{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none}
-[hidden]{display:none!important}
-:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
-.ic{width:1.15em;height:1.15em;fill:currentColor;flex:none}
-.num{font-family:Oswald,sans-serif;letter-spacing:.2px}
+// 1) sends the order to your bot automatically (via the Worker)
+// 2) opens the customer's chat with you, message prefilled — they tap Send
+$('#order').onclick = async () => {
+  if (!cartRows().length) return;
+  if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរសព្ទ'); $('#cp').focus(); return; }
+  if (!$('#cn').value.trim()) { toast('សូមបញ្ចូលឈ្មោះ'); $('#cn').focus(); return; }
 
-/* 3. Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;color:var(--txt);background:var(--raised);transition:transform .15s var(--ease),filter .15s,background .15s}
-.btn:active{transform:scale(.96)}
-.btn:hover{filter:brightness(1.12)}
-.btn.pri{background:var(--gold);color:var(--on-gold)}
-.btn.tg{background:var(--tg);color:#fff}
-.btn.call{background:var(--call);color:#fff}
-.btn.sec{border:1px solid var(--line);background:var(--surface)}
-.btn.wide{width:100%}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.iconbtn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;transition:transform .15s var(--ease)}
-.iconbtn:active{transform:scale(.9)}
-.iconbtn.tg{background:var(--tg)}.iconbtn.call{background:var(--call)}
-.iconbtn .ic{width:20px;height:20px}
+  const btn = $('#order');
+  btn.disabled = true;
+  const text = buildOrder();
 
-/* 4. Header */
-.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;padding:10px 4%;background:rgba(15,15,18,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--gold-hi),#a67c12);flex:none}
-.brand{flex:1;min-width:0;line-height:1.25}
-.brand h1{font-size:18px;color:var(--gold-hi)}
-.brand p{font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cartbtn{position:relative;width:46px;height:42px;border-radius:14px;background:var(--raised);display:grid;place-items:center}
-.cartbtn .ic{width:22px;height:22px}
-.cartbtn b{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:var(--gold);color:var(--on-gold);font:700 11px/20px Oswald,sans-serif;text-align:center}
-.cartbtn b.bump,.fab.bump{animation:bump .35s var(--ease)}
-@keyframes bump{40%{transform:scale(1.3)}}
+  // start the automatic send (don't await yet)
+  const relay = fetch(ORDER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  });
 
-/* 5. Hero — the one showpiece: a slowly turning sprocket */
-.hero{position:relative;overflow:hidden;padding:34px 4% 30px;background:radial-gradient(700px 260px at 85% 0,rgba(212,166,42,.2),transparent),var(--bg)}
-.hero svg.spin{position:absolute;right:-70px;top:-60px;width:280px;height:280px;fill:none;stroke:var(--gold);stroke-width:3;opacity:.16;animation:spin 40s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.hero h2{position:relative;font-size:clamp(24px,6vw,42px);line-height:1.4;max-width:640px}
-.hero p{position:relative;color:var(--mute);margin-top:8px;max-width:480px;font-size:14px}
-.cta{position:relative;display:flex;gap:10px;margin-top:20px}
-.cta .btn{flex:1;max-width:230px}
+  // open the chat in the same tap so the browser doesn't block it
+  window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
 
-/* 6. Search + categories */
-.tools{position:sticky;top:63px;z-index:40;padding:10px 4% 12px;background:rgba(15,15,18,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.sbox{position:relative;max-width:560px}
-.sbox .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mute)}
-.search,.in,.sel{width:100%;min-height:46px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 14px;transition:border-color .15s,box-shadow .15s}
-.sbox .search{padding-left:42px}
-.search:focus,.in:focus,.sel:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,166,42,.18)}
-.cats{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.chip{flex:none;min-height:38px;padding:0 16px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14px;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
-.chip.on{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+  // now check the automatic send
+  try {
+    const r = await relay;
+    if (!r.ok) throw new Error('relay ' + r.status);
+    toast('បានផ្ញើការកម្មង់ ✓ សូមចុចផ្ញើក្នុង Telegram ផងដែរ');
+    cart = {}; refresh(); cartOpen(false);
+  } catch (e) {
+    console.error(e);
+    toast('សូមចុចផ្ញើក្នុង Telegram ដើម្បីបញ្ចប់ការកម្មង់');
+  } finally {
+    btn.disabled = !cartRows().length;
+  }
+};
 
-/* 7. Product grid */
-main{padding:14px 4% 110px}
-.count{color:var(--mute);font-size:13px;margin-bottom:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
-.card:hover{transform:translateY(-4px);border-color:rgba(212,166,42,.5);box-shadow:0 12px 28px rgba(0,0,0,.45)}
-.im{position:relative;aspect-ratio:1/1;background:var(--raised);overflow:hidden}
-.im img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s var(--ease)}
-.card:hover .im img{transform:scale(1.05)}
-.tag{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:2px 10px;border-radius:99px}
-.out .im img{opacity:.35;filter:grayscale(1)}
-.out h3{color:var(--mute)}
-.bd{display:flex;flex-direction:column;gap:2px;flex:1;padding:12px 12px 12px}
-.bd small{color:var(--mute);font-size:12px}
-.bd h3{flex:1;font-size:15px;font-weight:600;line-height:1.45}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;min-height:40px}
-.price{font:600 21px Oswald,sans-serif;color:var(--gold-hi)}
-.add{min-height:40px;padding:0 14px;border-radius:12px;background:var(--gold);color:var(--on-gold);font-weight:700;font-size:13px;transition:transform .15s var(--ease)}
-.add:active{transform:scale(.93)}
-.add:disabled{background:var(--raised);color:var(--mute);cursor:not-allowed;transform:none}
-.step{display:flex;align-items:center;background:var(--raised);border-radius:12px;overflow:hidden}
-.step button{width:38px;height:40px;font-size:20px;color:var(--gold-hi)}
-.step button:active{background:var(--line)}
-.step b{min-width:22px;text-align:center;font-family:Oswald,sans-serif}
-.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:56px 0}
-.skel{height:270px;border-radius:var(--r);background:linear-gradient(100deg,var(--surface) 30%,var(--raised) 50%,var(--surface) 70%) 0 0/300% 100%;animation:shine 1.3s linear infinite}
-@keyframes shine{to{background-position:-300% 0}}
-
-/* 8. Floating cart bar */
-.fab{position:fixed;left:50%;bottom:calc(14px + var(--safe));transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;width:min(460px,92%);min-height:54px;padding:0 20px;border-radius:99px;background:var(--gold);color:var(--on-gold);font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.55);animation:rise .35s var(--ease)}
-.fab span{flex:1;text-align:left}
-.fab b{font:700 19px Oswald,sans-serif}
-@keyframes rise{from{transform:translate(-50%,40px);opacity:0}}
-
-/* 9. Footer */
-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:22px 4% calc(90px + var(--safe));border-top:1px solid var(--line);color:var(--mute);font-size:13px}
-footer a{color:var(--mute)}
-
-/* 10. Cart drawer (bottom sheet on phones, side panel on desktop) */
-.veil{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s}
-.veil.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;z-index:90;left:0;right:0;bottom:0;max-height:90vh;display:flex;flex-direction:column;background:var(--surface);border-radius:24px 24px 0 0;transform:translateY(105%);transition:transform .32s var(--ease)}
-.drawer.on{transform:none}
-.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 10px;font-weight:700;font-size:18px}
-.x{width:36px;height:36px;border-radius:50%;background:var(--raised);font-size:22px;line-height:1;color:var(--mute)}
-.dl{flex:1;overflow:auto;padding:0 20px}
-.ci{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
-.ci>div:first-child{flex:1;font-size:14px}
-.ci em{display:block;font:600 16px Oswald,sans-serif;font-style:normal;color:var(--gold-hi)}
-.df{display:grid;gap:10px;padding:14px 20px calc(18px + var(--safe));border-top:1px solid var(--line)}
-.df .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tot{display:flex;justify-content:space-between;align-items:center;font-weight:700}
-.tot span:last-child{font:700 24px Oswald,sans-serif;color:var(--gold-hi)}
-.hint{font-size:12px;color:var(--mute);text-align:center}
-@media(min-width:760px){
-  .drawer{left:auto;top:0;width:420px;max-height:none;border-radius:24px 0 0 24px;transform:translateX(105%)}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+/* ---------- optional invoice save (JPG / PDF) ---------- */
+const save=(u,n)=>{ const a=document.createElement('a'); a.href=u; a.download=n; document.body.appendChild(a); a.click(); a.remove(); };
+async function makeInvoice(){
+  const rows=cartRows();
+  try{ await Promise.all([['400 20px "Kantumruy Pro"','កខ'],['700 20px "Kantumruy Pro"','កខ'],['500 20px Oswald','1A'],['700 36px Oswald','1A']].map(a=>document.fonts.load(...a))); }catch(e){}
+  const W=800,RH=56,H=rows.length*RH+600,c=document.createElement('canvas'); c.width=W; c.height=H;
+  const x=c.getContext('2d'), F=(w,s,f='Kantumruy Pro')=>{ x.font=`${w} ${s}px "${f}",sans-serif`; };
+  const T=(t,px,py,al='left',col='#333')=>{ x.textAlign=al; x.fillStyle=col; x.fillText(t,px,py); };
+  x.textBaseline='middle'; x.fillStyle='#fff'; x.fillRect(0,0,W,H);
+  x.fillStyle='#121214'; x.fillRect(0,0,W,124); x.fillStyle='#c59b27'; x.fillRect(0,124,W,6);
+  F(700,40); T(SHOP.name,40,48,'left','#e0b63f'); F(400,20); T(SHOP.tagline,40,90,'left','#d8d8de');
+  F(700,36,'Oswald'); T('INVOICE',W-40,48,'right','#fff'); F(400,20); T('វិក្កយបត្រ',W-40,90,'right','#d8d8de');
+  const d=new Date(), p2=n=>String(n).padStart(2,'0');
+  const no='INV-'+String(d.getFullYear()).slice(2)+p2(d.getMonth()+1)+p2(d.getDate())+'-'+p2(d.getHours())+p2(d.getMinutes());
+  F(400,20); T('លេខ៖ '+no,40,166); T('កាលបរិច្ឆេទ៖ '+d.toLocaleDateString('en-GB')+' '+p2(d.getHours())+':'+p2(d.getMinutes()),40,198);
+  const cn=$('#cn').value.trim(), cp=$('#cp').value.trim(), cu=[cn,cp].filter(Boolean).join(' · ');
+  if(cu) T('អតិថិជន៖ '+cu,40,230);
+  x.fillStyle='#f1f1f4'; x.fillRect(40,256,720,46);
+  F(700,18); T('#',56,279); T('ទំនិញ',90,279); T('ចំនួន',470,279,'right'); T('តម្លៃ',620,279,'right'); T('សរុប',760,279,'right');
+  let total=0;
+  rows.forEach((r,i)=>{
+    const y=302+i*RH+RH/2; total+=r.amt;
+    let t=r.p.name; F(400,19); while(x.measureText(t).width>330&&t.length>1) t=t.slice(0,-1); if(t!==r.p.name) t+='…';
+    T(String(i+1),56,y); T(t,90,y); F(500,20,'Oswald'); T('x'+r.n,470,y,'right'); T(fmt(r.unit),620,y,'right'); T(fmt(r.amt),760,y,'right','#111');
+    x.fillStyle='#e5e5ea'; x.fillRect(40,302+(i+1)*RH-1,720,1);
+  });
+  const ty=302+rows.length*RH+28, o=other(cur);
+  x.fillStyle='#121214'; x.fillRect(400,ty,360,70); F(700,22); T('សរុប',424,ty+35,'left','#fff'); F(700,34,'Oswald'); T(fmt(total),736,ty+35,'right','#e0b63f');
+  F(400,17); T(rateText(),40,ty+100,'left','#777'); T('≈ '+fmt(conv(total,cur,o),o),760,ty+100,'right','#777');
+  F(400,19); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+156); T('ទូរសព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+192); T('Telegram: @'+SHOP.telegram,40,ty+224);
+  const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.92));
+  return {blob,url:URL.createObjectURL(blob),w:W,h:H,no};
 }
+function pdfParts(j,w,h){
+  const E=new TextEncoder(), W=595, H=Math.round(W*h/w), ct=`q ${W} 0 0 ${H} 0 0 cm /I Do Q`;
+  const objs=['<</Type/Catalog/Pages 2 0 R>>','<</Type/Pages/Kids[3 0 R]/Count 1>>',
+   `<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${W} ${H}]/Resources<</XObject<</I 4 0 R>>>>/Contents 5 0 R>>`,
+   [`<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${j.length}>>\nstream\n`,j,'\nendstream'],
+   `<</Length ${ct.length}>>\nstream\n${ct}\nendstream`];
+  const out=[E.encode('%PDF-1.4\n')], offs=[]; let pos=out[0].length;
+  objs.forEach((o,i)=>{ offs.push(pos); [`${i+1} 0 obj\n`,...[].concat(o),'\nendobj\n'].map(q=>typeof q==='string'?E.encode(q):q).forEach(q=>{ out.push(q); pos+=q.length; }); });
+  out.push(E.encode('xref\n0 6\n0000000000 65535 f \n'+offs.map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${pos}\n%%EOF`));
+  return out;
+}
+async function saveInvoice(kind){
+  if(!cartRows().length) return;
+  toast('កំពុងបង្កើតវិក្កយបត្រ...');
+  try{
+    const inv=await makeInvoice();
+    if(kind==='jpg'){ save(inv.url,inv.no+'.jpg'); setTimeout(()=>URL.revokeObjectURL(inv.url),8000); }
+    else{
+      const b=new Uint8Array(await inv.blob.arrayBuffer());
+      const u=URL.createObjectURL(new Blob(pdfParts(b,inv.w,inv.h),{type:'application/pdf'}));
+      save(u,inv.no+'.pdf'); setTimeout(()=>{ URL.revokeObjectURL(u); URL.revokeObjectURL(inv.url); },8000);
+    }
+    toast('បានរក្សាទុកវិក្កយបត្រ ✓');
+  }catch(e){ console.error(e); toast('Cannot create invoice'); }
+}
+$('#invjpg').onclick=()=>saveInvoice('jpg');
+$('#invpdf').onclick=()=>saveInvoice('pdf');
 
-/* 11. Toast + modals */
-.toast{position:fixed;left:50%;bottom:calc(86px + var(--safe));transform:translate(-50%,20px);z-index:200;max-width:90%;padding:11px 20px;border-radius:99px;background:#fff;color:#111;font-weight:600;font-size:14px;text-align:center;opacity:0;pointer-events:none;transition:.25s var(--ease)}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-.modal{position:fixed;inset:0;z-index:120;display:grid;place-items:end center;background:rgba(0,0,0,.7)}
-.form{display:grid;gap:14px;width:100%;max-width:440px;max-height:92vh;overflow:auto;padding:22px 22px calc(22px + var(--safe));background:var(--surface);border-radius:24px 24px 0 0;animation:sheet .3s var(--ease)}
-@keyframes sheet{from{transform:translateY(60px);opacity:0}}
-.form h3{color:var(--gold-hi);font-size:18px}
-.f label{display:block;margin-bottom:5px;font-size:13px;color:var(--mute)}
-.f .in,.f .sel{background:var(--bg)}
-.up{display:flex;gap:12px;align-items:center}
-.pv{width:84px;height:84px;border-radius:12px;background:var(--raised);overflow:hidden;flex:none}
-.pv img{width:100%;height:100%;object-fit:cover;display:block}
-.chk{display:flex;gap:10px;align-items:center;font-weight:600}
-.acts{display:flex;gap:10px;justify-content:flex-end}
-.err{color:var(--red);font-size:13px}
-.callrow{display:grid;gap:10px}
-@media(min-width:560px){.modal{place-items:center;padding:16px}.form{border-radius:24px}}
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.hidden=true; }));
+addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal').forEach(m=>{ m.hidden=true; }); });
 
-/* 12. Admin */
-.adm{max-width:920px;margin:0 auto;padding:20px 4% 60px}
-.ah{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.ah h2{font-size:22px;color:var(--gold-hi)}
-.note{margin-bottom:16px;padding:10px 14px;border-radius:12px;background:#2b2616;border:1px solid #5b4a16;color:#e8d594;font-size:13px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.st{padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
-.st b{display:block;font:600 28px/1.2 Oswald,sans-serif;color:var(--gold-hi)}
-.st span{font-size:13px;color:var(--mute)}
-.st.o b{color:var(--red)}
-.flt{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
-.flt .search{flex:1 1 180px;width:auto}
-.flt .sel{flex:1 1 150px;width:auto}
-.ar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:8px;padding:10px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
-.ar.o{opacity:.75}
-.th{width:54px;height:54px;border-radius:10px;background:var(--raised);overflow:hidden;flex:none}
-.th img{width:100%;height:100%;object-fit:cover;display:block}
-.ai{flex:1 1 130px;min-width:0}
-.ai b{display:block;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ai span{font-size:13px;color:var(--mute)}
-.ib{min-height:38px;padding:0 13px;border-radius:10px;background:var(--raised);font-size:13px}
-.ib:hover{background:var(--line)}
-.ib.d:hover{background:var(--red)}
-.sw{position:relative;display:inline-block;width:46px;height:26px;flex:none}
-.sw input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:1}
-.sw i{position:absolute;inset:0;border-radius:99px;background:var(--line);transition:.2s}
-.sw i::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
-.sw input:checked+i{background:var(--ok)}
-.sw input:checked+i::after{transform:translateX(20px)}
-
-/* 13. Currency switch + rate + cart stepper */
-.curs{display:flex;flex:none;padding:3px;border-radius:99px;background:var(--raised);border:1px solid var(--line)}
-.curs button{min-width:38px;height:34px;padding:0 10px;border-radius:99px;font:700 16px Oswald,'Kantumruy Pro',sans-serif;color:var(--mute);transition:background .15s,color .15s}
-.curs button.on{background:var(--gold);color:var(--on-gold)}
-.rt{font-size:12px;color:var(--mute)}
-.prow{display:grid;grid-template-columns:1fr 120px;gap:10px}
-.q{display:flex;align-items:center;background:var(--raised);border-radius:12px;overflow:hidden}
-.q button{width:36px;height:38px;font-size:20px;color:var(--gold-hi)}
-.q button:active{background:var(--line)}
-.q span{min-width:22px;text-align:center;font-family:Oswald,sans-serif;font-weight:700}
-.df .two .btn{min-height:42px;font-size:14px}
-@media(max-width:380px){.brand p{display:none}}
-
-/* 14. Motion preferences */
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* ---------- boot ---------- */
+function refresh(){ renderShop(); renderCart(); if(!$('#admin').hidden) renderAdmin(); }
+function route(){ const a=location.hash==='#admin'; $('#shop').hidden=a; $('#admin').hidden=!a; cartOpen(false); if(a) renderAdmin(); scrollTo(0,0); }
+$('#sName').textContent=SHOP.name; $('#sTag').textContent=SHOP.tagline; $('#fName').textContent='© '+SHOP.name;
+$('#tgBtn').href='https://t.me/'+SHOP.telegram;
+$('#pc').innerHTML=CATS.map(c=>`<option>${esc(c)}</option>`).join('');
+$('#af').innerHTML='<option value="">ប្រភេទទាំងអស់</option>'+CATS.map(c=>`<option>${esc(c)}</option>`).join('');
+renderCats(); renderCart(); paintCur(); $('#grid').innerHTML=R(6,()=>'<div class="skel"></div>'); addEventListener('hashchange',route); route();
+loadRate().then(refresh);
+DB.init(refresh);
+</script>
+</body>
+</html>
