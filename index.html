@@ -342,26 +342,36 @@ function buildOrder(){
 // Opens Telegram with the message typed in — the customer taps Send. Nothing is sent automatically.
 const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';
 
+const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';
+
 $('#order').onclick = async () => {
   if (!cartRows().length) return;
   if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរសព្ទ'); $('#cp').focus(); return; }
+  if (!$('#cn').value.trim()) { toast('សូមបញ្ចូលឈ្មោះ'); $('#cn').focus(); return; }
 
   const btn = $('#order');
   btn.disabled = true;
   const text = buildOrder();
+
+  // 1) start the automatic send (don't await yet)
+  const relay = fetch(ORDER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  });
+
+  // 2) open the chat with the message prefilled, in the same tap so it isn't blocked
+  window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+
+  // 3) now check the automatic send
   try {
-    const r = await fetch(ORDER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text })
-    });
+    const r = await relay;
     if (!r.ok) throw new Error('relay ' + r.status);
-    toast('បានផ្ញើការកម្មង់ ✓');
+    toast('បានផ្ញើការកម្មង់ ✓ សូមចុចផ្ញើក្នុង Telegram ផងដែរ');
     cart = {}; refresh(); cartOpen(false);
   } catch (e) {
-    // fallback: customer taps Send in Telegram manually
-    window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-    toast('សូមចុចផ្ញើក្នុង Telegram');
+    console.error(e);
+    toast('សូមចុចផ្ញើក្នុង Telegram ដើម្បីបញ្ចប់ការកម្មង់');
   } finally {
     btn.disabled = !cartRows().length;
   }
