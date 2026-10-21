@@ -340,9 +340,31 @@ function buildOrder(){
   return ['🛒 ការកម្មង់ថ្មី · '+SHOP.name,'',...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${fmt(r.amt)}`),'','💰 សរុប៖ '+fmt(total)+` (≈ ${fmt(conv(total,cur,o),o)})`,...(nm?['👤 '+nm]:[]),...(ph?['📞 '+ph]:[])].join('\n');
 }
 // Opens Telegram with the message typed in — the customer taps Send. Nothing is sent automatically.
-$('#order').onclick=()=>{
-  if(!cartRows().length) return;
-  window.open('https://t.me/'+SHOP.telegram+'?text='+encodeURIComponent(buildOrder()),'_blank','noopener');
+const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';
+
+$('#order').onclick = async () => {
+  if (!cartRows().length) return;
+  if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរសព្ទ'); $('#cp').focus(); return; }
+
+  const btn = $('#order');
+  btn.disabled = true;
+  const text = buildOrder();
+  try {
+    const r = await fetch(ORDER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text })
+    });
+    if (!r.ok) throw new Error('relay ' + r.status);
+    toast('បានផ្ញើការកម្មង់ ✓');
+    cart = {}; refresh(); cartOpen(false);
+  } catch (e) {
+    // fallback: customer taps Send in Telegram manually
+    window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    toast('សូមចុចផ្ញើក្នុង Telegram');
+  } finally {
+    btn.disabled = !cartRows().length;
+  }
 };
 
 /* ---------- optional invoice save (JPG / PDF) ---------- */
