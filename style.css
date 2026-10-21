@@ -2,24 +2,27 @@
 
 /* 1. Tokens */
 :root{
+  color-scheme:dark;
   --bg:#0f0f12; --surface:#18181d; --raised:#212128; --line:#2c2c35;
   --txt:#f4f4f6; --mute:#9d9da8;
   --gold:#d4a62a; --gold-hi:#f0c54a; --on-gold:#1b1503;
   --tg:#229ed9; --call:#1f9d63; --red:#ef5b52; --ok:#3fbf86;
   --r:16px; --ease:cubic-bezier(.2,.8,.2,1);
   --safe:env(safe-area-inset-bottom,0px);
+  --hdr:63px; /* sticky header height — .tools sticks below it */
 }
 
 /* 2. Base */
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{font-family:'Kantumruy Pro',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-tap-highlight-color:transparent}
+body:has(.drawer.on),body:has(.modal:not([hidden])){overflow:hidden}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
 [hidden]{display:none!important}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
 .ic{width:1.15em;height:1.15em;fill:currentColor;flex:none}
-.num{font-family:Oswald,'Kantumruy Pro',sans-serif;letter-spacing:.2px}
+.num{font-family:Oswald,sans-serif;letter-spacing:.2px}
 
 /* 3. Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;color:var(--txt);background:var(--raised);transition:transform .15s var(--ease),filter .15s,background .15s}
@@ -41,12 +44,14 @@ button{cursor:pointer;border:0;background:none}
 .logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--gold-hi),#a67c12);flex:none}
 .brand{flex:1;min-width:0;line-height:1.25}
 .brand h1{font-size:18px;color:var(--gold-hi)}
-.brand p{font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cartbtn{position:relative;width:46px;height:42px;border-radius:14px;background:var(--raised);display:grid;place-items:center;flex:none}
+.brand p{font-size:12px;line-height:1.6;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis} /* 1.6 so Khmer marks aren't clipped */
+.cartbtn{position:relative;width:46px;height:42px;border-radius:14px;background:var(--raised);display:grid;place-items:center}
 .cartbtn .ic{width:22px;height:22px}
 .cartbtn b{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:var(--gold);color:var(--on-gold);font:700 11px/20px Oswald,sans-serif;text-align:center}
-.cartbtn b.bump,.fab.bump{animation:bump .35s var(--ease)}
+.cartbtn b.bump{animation:bump .35s var(--ease)}
+.fab.bump{animation:bumpfab .35s var(--ease)} /* keeps the translateX(-50%) centring */
 @keyframes bump{40%{transform:scale(1.3)}}
+@keyframes bumpfab{40%{transform:translateX(-50%) scale(1.06)}}
 
 /* 5. Hero — the one showpiece: a slowly turning sprocket */
 .hero{position:relative;overflow:hidden;padding:34px 4% 30px;background:radial-gradient(700px 260px at 85% 0,rgba(212,166,42,.2),transparent),var(--bg)}
@@ -58,13 +63,15 @@ button{cursor:pointer;border:0;background:none}
 .cta .btn{flex:1;max-width:230px}
 
 /* 6. Search + categories */
-.tools{position:sticky;top:63px;z-index:40;padding:10px 4% 12px;background:rgba(15,15,18,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tools{position:sticky;top:var(--hdr);z-index:40;padding:10px 4% 12px;background:rgba(15,15,18,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .sbox{position:relative;max-width:560px}
-.sbox .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mute)}
+.sbox .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none}
 .search,.in,.sel{width:100%;min-height:46px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 14px;transition:border-color .15s,box-shadow .15s}
+.search{-webkit-appearance:none;appearance:none}
+.search::-webkit-search-cancel-button{-webkit-appearance:none}
 .sbox .search{padding-left:42px}
 .search:focus,.in:focus,.sel:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,166,42,.18)}
-.cats{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
 .chip{flex:none;min-height:38px;padding:0 16px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14px;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
 .chip.on{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
@@ -72,7 +79,7 @@ button{cursor:pointer;border:0;background:none}
 /* 7. Product grid */
 main{padding:14px 4% 110px}
 .count{color:var(--mute);font-size:13px;margin-bottom:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(156px,1fr));gap:12px}
 .card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
 .card:hover{transform:translateY(-4px);border-color:rgba(212,166,42,.5);box-shadow:0 12px 28px rgba(0,0,0,.45)}
 .im{position:relative;aspect-ratio:1/1;background:var(--raised);overflow:hidden}
@@ -84,9 +91,112 @@ main{padding:14px 4% 110px}
 .bd{display:flex;flex-direction:column;gap:2px;flex:1;padding:12px}
 .bd small{color:var(--mute);font-size:12px}
 .bd h3{flex:1;font-size:15px;font-weight:600;line-height:1.45}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;min-height:40px}
-.price{font:600 20px Oswald,'Kantumruy Pro',sans-serif;color:var(--gold-hi)}
-.add{min-height:40px;padding:0 14px;border-radius:12px;background:var(--gold);color:var(--on-gold);font-weight:700;font-size:13px;transition:transform .15s var(--ease);white-space:nowrap}
+.row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 8px;margin-top:8px;min-height:40px}
+.price{font:600 21px Oswald,sans-serif;color:var(--gold-hi);white-space:nowrap}
+.add{min-height:40px;padding:0 14px;border-radius:12px;background:var(--gold);color:var(--on-gold);font-weight:700;font-size:13px;transition:transform .15s var(--ease)}
 .add:active{transform:scale(.93)}
 .add:disabled{background:var(--raised);color:var(--mute);cursor:not-allowed;transform:none}
-.step{display:flex;align-items:center;background:var(--raised);border
+.step{display:flex;align-items:center;background:var(--raised);border-radius:12px;overflow:hidden}
+.step button{width:38px;height:40px;font-size:20px;color:var(--gold-hi)}
+.step button:active{background:var(--line)}
+.step b{min-width:22px;text-align:center;font-family:Oswald,sans-serif}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:56px 0}
+.skel{height:270px;border-radius:var(--r);background:linear-gradient(100deg,var(--surface) 30%,var(--raised) 50%,var(--surface) 70%) 0 0/300% 100%;animation:shine 1.3s linear infinite}
+@keyframes shine{to{background-position:-300% 0}}
+
+/* 8. Floating cart bar */
+.fab{position:fixed;left:50%;bottom:calc(14px + var(--safe));transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;width:min(460px,92%);min-height:54px;padding:0 20px;border-radius:99px;background:var(--gold);color:var(--on-gold);font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.55);animation:rise .35s var(--ease)}
+.fab span{flex:1;text-align:left}
+.fab b{font:700 19px Oswald,sans-serif}
+@keyframes rise{from{transform:translate(-50%,40px);opacity:0}}
+
+/* 9. Footer */
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:22px 4% calc(90px + var(--safe));border-top:1px solid var(--line);color:var(--mute);font-size:13px}
+footer a{color:var(--mute)}
+
+/* 10. Cart drawer (bottom sheet on phones, side panel on desktop) */
+.veil{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s}
+.veil.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:90;left:0;right:0;bottom:0;max-height:90vh;max-height:90dvh;display:flex;flex-direction:column;background:var(--surface);border-radius:24px 24px 0 0;transform:translateY(105%);visibility:hidden;transition:transform .32s var(--ease),visibility 0s .32s}
+.drawer.on{transform:none;visibility:visible;transition-delay:0s}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 10px;font-weight:700;font-size:18px}
+.x{width:36px;height:36px;border-radius:50%;background:var(--raised);font-size:22px;line-height:1;color:var(--mute)}
+.dl{flex:1;overflow:auto;padding:0 20px}
+.ci{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ci>div:first-child{flex:1;font-size:14px}
+.ci em{display:block;font:600 16px Oswald,sans-serif;font-style:normal;color:var(--gold-hi)}
+.df{display:grid;gap:10px;padding:14px 20px calc(18px + var(--safe));border-top:1px solid var(--line)}
+.df .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tot{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.tot span:last-child{font:700 24px Oswald,sans-serif;color:var(--gold-hi)}
+.hint{font-size:12px;color:var(--mute);text-align:center}
+@media(min-width:760px){
+  .drawer{left:auto;top:0;width:420px;max-height:none;border-radius:24px 0 0 24px;transform:translateX(105%)}
+  .drawer.on{transform:none}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+}
+
+/* 11. Toast + modals */
+.toast{position:fixed;left:50%;bottom:calc(86px + var(--safe));transform:translate(-50%,20px);z-index:200;max-width:90%;padding:11px 20px;border-radius:99px;background:#fff;color:#111;font-weight:600;font-size:14px;text-align:center;opacity:0;pointer-events:none;transition:.25s var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;z-index:120;display:grid;place-items:end center;background:rgba(0,0,0,.7)}
+.form{display:grid;gap:14px;width:100%;max-width:440px;max-height:92vh;max-height:92dvh;overflow:auto;padding:22px 22px calc(22px + var(--safe));background:var(--surface);border-radius:24px 24px 0 0;animation:sheet .3s var(--ease)}
+@keyframes sheet{from{transform:translateY(60px);opacity:0}}
+.form h3{color:var(--gold-hi);font-size:18px}
+.f label:not(.chk){display:block;margin-bottom:5px;font-size:13px;color:var(--mute)} /* :not(.chk) — otherwise it overrides the switch label */
+.f .in,.f .sel{background:var(--bg)}
+.up{display:flex;gap:12px;align-items:center}
+.pv{width:84px;height:84px;border-radius:12px;background:var(--raised);overflow:hidden;flex:none}
+.pv img{width:100%;height:100%;object-fit:cover;display:block}
+.chk{display:flex;gap:10px;align-items:center;font-weight:600}
+.acts{display:flex;gap:10px;justify-content:flex-end}
+.err{color:var(--red);font-size:13px}
+.callrow{display:grid;gap:10px}
+@media(min-width:560px){.modal{place-items:center;padding:16px}.form{border-radius:24px}}
+
+/* 12. Admin */
+.adm{max-width:920px;margin:0 auto;padding:20px 4% 60px}
+.ah{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.ah h2{font-size:22px;color:var(--gold-hi)}
+.note{margin-bottom:16px;padding:10px 14px;border-radius:12px;background:#2b2616;border:1px solid #5b4a16;color:#e8d594;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.st{padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.st b{display:block;font:600 28px/1.2 Oswald,sans-serif;color:var(--gold-hi)}
+.st span{font-size:13px;color:var(--mute)}
+.st.o b{color:var(--red)}
+.flt{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.flt .search{flex:1 1 180px;width:auto}
+.flt .sel{flex:1 1 150px;width:auto}
+.ar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:8px;padding:10px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.ar.o{opacity:.75}
+.th{width:54px;height:54px;border-radius:10px;background:var(--raised);overflow:hidden;flex:none}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.ai{flex:1 1 130px;min-width:0}
+.ai b{display:block;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ai span{font-size:13px;color:var(--mute)}
+.ib{min-height:38px;padding:0 13px;border-radius:10px;background:var(--raised);font-size:13px}
+.ib:hover{background:var(--line)}
+.ib.d:hover{background:var(--red)}
+.sw{position:relative;display:inline-block;width:46px;height:26px;flex:none}
+.sw input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:1}
+.sw i{position:absolute;inset:0;border-radius:99px;background:var(--line);transition:.2s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+i{background:var(--ok)}
+.sw input:checked+i::after{transform:translateX(20px)}
+.sw input:focus-visible+i{outline:2px solid var(--gold-hi);outline-offset:2px}
+
+/* 13. Currency switch + rate + cart stepper */
+.curs{display:flex;flex:none;padding:3px;border-radius:99px;background:var(--raised);border:1px solid var(--line)}
+.curs button{min-width:38px;height:34px;padding:0 10px;border-radius:99px;font:700 16px Oswald,'Kantumruy Pro',sans-serif;color:var(--mute);transition:background .15s,color .15s}
+.curs button.on{background:var(--gold);color:var(--on-gold)}
+.rt{font-size:12px;color:var(--mute)}
+.prow{display:grid;grid-template-columns:1fr 120px;gap:10px}
+.q{display:flex;align-items:center;background:var(--raised);border-radius:12px;overflow:hidden}
+.q button{width:36px;height:38px;font-size:20px;color:var(--gold-hi)}
+.q button:active{background:var(--line)}
+.q span{min-width:22px;text-align:center;font-family:Oswald,sans-serif;font-weight:700}
+.df .two .btn{min-height:42px;font-size:14px}
+@media(max-width:380px){.brand p{display:none}}
+
+/* 14. Motion preferences */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
