@@ -3,145 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#121214">
+<meta name="theme-color" content="#0f0f12">
 <title>ជាងទ្រី - លក់គ្រឿងបន្លាស់ម៉ូតូ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{--gold:#c59b27;--gold2:#e0b63f;--ink:#121214;--panel:#1e1e24;--line:#33333c;--mute:#a4a4ae;--txt:#f5f5f7;--red:#e5534b;--ok:#4cc38a}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Kantumruy Pro',sans-serif}
-[hidden]{display:none!important}
-body{background:var(--ink);color:var(--txt);line-height:1.6}
-button,input,select{font:inherit;color:inherit}
-button{cursor:pointer;border:0}
-:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
-header{position:sticky;top:0;z-index:50;background:rgba(30,30,36,.92);backdrop-filter:blur(10px);border-bottom:3px solid var(--gold);padding:12px 5%;display:flex;align-items:center;gap:14px}
-.logo{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-size:22px;background:radial-gradient(circle,#3a3a45,#1e1e24);flex:none}
-.brand{flex:1;min-width:0}.brand h1{font-size:19px;color:var(--gold);line-height:1.3}.brand p{font-size:12px;color:var(--mute)}
-.cartbtn{background:var(--gold);color:#1a1405;font-weight:700;padding:9px 16px;border-radius:999px;display:flex;gap:8px;align-items:center}
-.cartbtn b{background:#1a1405;color:var(--gold2);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px;padding:0 6px}
-.hero{padding:48px 5% 36px;background:radial-gradient(900px 300px at 80% -20%,rgba(197,155,39,.22),transparent),repeating-linear-gradient(135deg,transparent 0 22px,rgba(255,255,255,.015) 22px 23px);border-bottom:1px solid var(--line)}
-.hero h2{font-size:clamp(28px,5vw,46px);line-height:1.35;max-width:760px;font-weight:700}
-.hero p{color:var(--mute);margin-top:10px;max-width:520px}
-.hero .cta{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
-.btn{padding:11px 20px;border-radius:10px;font-weight:600;text-decoration:none;display:inline-block;transition:.2s}
-.btn.pri{background:var(--gold);color:#1a1405}.btn.pri:hover{background:var(--gold2)}
-.btn.sec{border:1px solid var(--line);background:var(--panel)}.btn.sec:hover{border-color:var(--gold)}
-.tools{position:sticky;top:75px;z-index:40;background:var(--ink);padding:14px 5% 10px;border-bottom:1px solid var(--line)}
-.search{width:100%;max-width:520px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 14px;display:block}
-.search:focus{border-color:var(--gold);outline:0}
-.cats{display:flex;gap:8px;overflow-x:auto;padding-top:12px;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}
-.chip{background:var(--panel);border:1px solid var(--line);padding:7px 16px;border-radius:8px;white-space:nowrap;font-weight:600;font-size:14px;transition:.2s}
-.chip:hover{border-color:var(--gold)}.chip.on{background:var(--gold);color:#1a1405;border-color:var(--gold)}
-main{padding:22px 5% 50px}
-.count{color:var(--mute);font-size:13px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
-.card:hover{transform:translateY(-3px);border-color:var(--gold)}
-.im{aspect-ratio:1;background:#2a2a32;position:relative;display:grid;place-items:center;font-size:54px}
-.im img{width:100%;height:100%;object-fit:cover}
-.tag{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:12px;padding:3px 10px;border-radius:6px}
-.out .im img,.out .im span{opacity:.35;filter:grayscale(1)}.out .bd h3{color:var(--mute)}
-.bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
-.bd small{color:var(--mute);font-size:12px}.bd h3{font-size:15px;font-weight:600;line-height:1.45;flex:1}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
-.price{font-family:Oswald,sans-serif;font-size:22px;color:var(--gold2)}
-.add{background:var(--gold);color:#1a1405;font-weight:700;padding:8px 12px;border-radius:8px;font-size:13px}
-.add:disabled{background:var(--line);color:var(--mute);cursor:not-allowed}
-.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:60px 0}
-footer{border-top:1px solid var(--line);padding:26px 5%;color:var(--mute);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-footer a{color:var(--mute)}
-/* drawer */
-.veil{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:80;opacity:0;pointer-events:none;transition:.25s}
-.veil.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--panel);z-index:90;transform:translateX(100%);transition:transform .28s;display:flex;flex-direction:column;border-left:2px solid var(--gold)}
-.drawer.on{transform:none}
-.dh{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);font-weight:700}
-.x{background:none;font-size:24px;color:var(--mute);line-height:1}
-.dl{flex:1;overflow:auto;padding:10px 20px}
-.ci{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
-.ci div:first-child{flex:1;font-size:14px}.ci em{display:block;font-style:normal;color:var(--gold2);font-family:Oswald}
-.q{display:flex;align-items:center;gap:8px}.q button{width:28px;height:28px;border-radius:8px;background:var(--line)}
-.df{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:10px}
-.tot{display:flex;justify-content:space-between;font-weight:700}.tot span:last-child{font-family:Oswald;font-size:22px;color:var(--gold2)}
-.df .btn{text-align:center;width:100%}
-.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,30px);background:#fff;color:#111;padding:11px 20px;border-radius:10px;font-weight:600;z-index:200;opacity:0;transition:.25s;pointer-events:none;max-width:90%;text-align:center}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-/* admin */
-.adm{max-width:920px;margin:0 auto;padding:22px 5% 60px}
-.ah{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.ah h2{font-size:22px;color:var(--gold)}
-.note{background:#2b2616;border:1px solid #5b4a16;color:#e8d594;padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
-.st{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.st b{display:block;font-family:Oswald;font-size:28px;color:var(--gold2);line-height:1.2}.st span{font-size:13px;color:var(--mute)}
-.st.o b{color:var(--red)}
-.ar{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
-.ar.o{opacity:.8}
-.th{width:54px;height:54px;border-radius:8px;background:#2a2a32;overflow:hidden;display:grid;place-items:center;flex:none;font-size:24px}.th img{width:100%;height:100%;object-fit:cover}
-.ai{flex:1;min-width:0}.ai b{display:block;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ai span{font-size:13px;color:var(--mute)}
-.sw{position:relative;display:inline-block;width:46px;height:26px;flex:none}
-.sw input{opacity:0;position:absolute;inset:0;width:100%;height:100%;cursor:pointer;z-index:1}
-.sw i{position:absolute;inset:0;background:var(--line);border-radius:999px;transition:.2s}
-.sw i::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
-.sw input:checked+i{background:var(--ok)}.sw input:checked+i::after{transform:translateX(20px)}
-.sw input:focus-visible+i{outline:2px solid var(--gold2);outline-offset:2px}
-.ib{background:var(--line);border-radius:8px;padding:7px 11px;font-size:13px}.ib:hover{background:#4a4a56}.ib.d:hover{background:var(--red)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;display:grid;place-items:center;padding:16px}
-.form{background:var(--panel);border:1px solid var(--line);border-radius:16px;width:100%;max-width:440px;max-height:92vh;overflow:auto;padding:22px;display:grid;gap:14px}
-.form h3{color:var(--gold)}
-.f label{display:block;font-size:13px;color:var(--mute);margin-bottom:5px}
-.f input[type=text],.f input[type=number],.f input[type=email],.f input[type=password],.f select{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.f input:focus,.f select:focus{border-color:var(--gold);outline:0}
-.up{display:flex;gap:12px;align-items:center}
-.pv{width:84px;height:84px;border-radius:10px;background:#2a2a32;overflow:hidden;display:grid;place-items:center;font-size:30px;flex:none}.pv img{width:100%;height:100%;object-fit:cover}
-.chk{display:flex;gap:10px;align-items:center;font-weight:600}
-.acts{display:flex;gap:10px;justify-content:flex-end}
-.err{color:var(--red);font-size:13px}
-@media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.tools{top:71px}.bd h3{font-size:14px}.price{font-size:19px}.add{padding:7px 9px}.cartbtn span{display:none}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-/* v2 */
-header{border-bottom:1px solid var(--line);padding:10px 4%}
-.logo{width:42px;height:42px;font-size:20px}.brand h1{font-size:18px}
-.hero{padding:26px 4% 22px}.hero h2{font-size:clamp(22px,5.5vw,38px)}.hero p{font-size:14px}
-.hero .cta .btn{flex:1;min-width:140px}
-.btn{min-height:44px;border:0;border-radius:12px;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center}
-.btn.sec{border:1px solid var(--line)}
-.tools{top:63px;padding:10px 4%}
-.search{border-radius:12px;padding:12px 14px}
-.chip{border-radius:999px;padding:8px 16px;min-height:38px}
-main{padding:16px 4% 96px}.grid{gap:14px}
-.card{border-radius:16px;border-color:transparent;background:linear-gradient(180deg,#23232b,#1b1b21);box-shadow:0 2px 10px rgba(0,0,0,.25)}
-.card:hover{transform:none;border-color:transparent;box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.im{aspect-ratio:1/1}.im img{aspect-ratio:1/1;object-fit:cover}
-.add{border-radius:10px;min-height:38px}
-.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;background:var(--gold);color:#1a1405;font-weight:700;border-radius:999px;padding:13px 22px;box-shadow:0 8px 24px rgba(0,0,0,.5);display:flex;gap:8px;align-items:center;white-space:nowrap;max-width:94%}
-.fab b{background:#1a1405;color:var(--gold2);border-radius:999px;padding:1px 12px;font-family:Oswald,sans-serif}
-.in,.sel{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
-.in:focus,.sel:focus{border-color:var(--gold);outline:0}
-.flt{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.flt .search{flex:1 1 180px;max-width:none}.flt .sel{flex:1 1 150px;width:auto;background:var(--panel)}
-.ar{flex-wrap:wrap;border-radius:14px}.ai{flex:1 1 130px}.ar .ib{padding:9px 13px;border-radius:10px}
-.drawer{border-left:0;border-radius:18px 0 0 18px}
-@media(max-width:560px){.modal{place-items:end center;padding:0}.form{border-radius:18px 18px 0 0;max-width:none!important}.drawer{border-radius:0}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-tg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+<symbol id="i-call" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></symbol>
+</svg>
 
 <!-- ===== SHOP ===== -->
 <div id="shop">
-  <header>
+  <header class="top">
     <div class="logo">🏍️</div>
     <div class="brand"><h1 id="sName"></h1><p id="sTag"></p></div>
-    <button class="cartbtn" id="openCart" aria-label="កន្ត្រក"><span>កន្ត្រក</span> 🛒 <b id="cc">0</b></button>
+    <div class="cur-sw" role="group" aria-label="រូបិយប័ណ្ណ">
+      <button type="button" data-cur="KHR" class="on">៛ រៀល</button>
+      <button type="button" data-cur="USD">$ USD</button>
+    </div>
+    <button class="cartbtn" id="openCart" aria-label="កន្ត្រក"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><b id="cc">0</b></button>
   </header>
   <section class="hero">
+    <svg class="spin" viewBox="0 0 200 200" aria-hidden="true"><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(0 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(30 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(60 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(90 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(120 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(150 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(180 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(210 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(240 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(270 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(300 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(330 100 100)"/><circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="34"/><circle cx="100" cy="100" r="8"/></svg>
     <h2>គ្រឿងបន្លាស់ម៉ូតូ គុណភាពល្អ តម្លៃសមរម្យ</h2>
     <p>ជ្រើសរើសទំនិញ បន្ថែមទៅកន្ត្រក រួចផ្ញើការកម្មង់មកយើងតាម Telegram បានភ្លាមៗ។</p>
-    <div class="cta"><button class="btn pri" id="callBtn">📞 ទូរសព្ទមកហាង</button><a class="btn sec" id="tgBtn" target="_blank" rel="noopener">✈️ Telegram</a></div>
+    <div class="rate-pill" id="rateInfo">អត្រាប្តូរប្រាក់ថ្ងៃនេះ៖ $1 = 4,100 ៛</div>
+    <div class="cta"><button class="btn call" id="callBtn"><svg class="ic" aria-hidden="true"><use href="#i-call"/></svg> ទូរសព្ទមកហាង</button><a class="btn tg" id="tgBtn" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> Telegram</a></div>
   </section>
   <div class="tools">
-    <input class="search" id="q" type="search" placeholder="ស្វែងរកគ្រឿងបន្លាស់..." aria-label="ស្វែងរក">
+    <div class="sbox"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><input class="search" id="q" type="search" placeholder="ស្វែងរកគ្រឿងបន្លាស់..." aria-label="ស្វែងរក"></div>
     <div class="cats" id="cats"></div>
   </div>
   <main><div class="count" id="count"></div><div class="grid" id="grid"></div></main>
@@ -153,58 +50,83 @@ main{padding:16px 4% 96px}.grid{gap:14px}
 <aside class="drawer" id="drawer" aria-label="កន្ត្រក">
   <div class="dh"><span>កន្ត្រករបស់អ្នក</span><button class="x" id="closeCart" aria-label="បិទ">×</button></div>
   <div class="dl" id="cartList"></div>
-  <div class="df"><input class="in" id="cust" type="text" placeholder="ឈ្មោះ / លេខទូរសព្ទរបស់អ្នក (ស្រេចចិត្ត)" maxlength="60"><div class="tot"><span>សរុប</span><span id="cartTotal">$0</span></div><button class="btn pri" id="order">ផ្ញើការកម្មង់តាម Telegram</button></div>
+  <div class="df">
+    <div class="two"><input class="in" id="cn" type="text" placeholder="ឈ្មោះ" maxlength="40" autocomplete="name"><input class="in" id="cp" type="tel" placeholder="លេខទូរសព្ទ" maxlength="20" inputmode="tel" autocomplete="tel"></div>
+    <div class="tot"><span>សរុប</span><span id="cartTotal">0 ៛</span></div>
+    <button class="btn tg wide" id="order"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> ផ្ញើការកម្មង់ទៅ Telegram</button>
+    <div class="opt-dl">
+      <span>រក្សាទុកវិក្កយបត្រជាជម្រើស (ស្រេចចិត្ត)៖</span>
+      <div class="two">
+        <button type="button" class="btn sec sm" id="dlJpg"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> រូបភាព (JPG)</button>
+        <button type="button" class="btn sec sm" id="dlPdf"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> ឯកសារ (PDF)</button>
+      </div>
+    </div>
+    <p class="hint" id="hint"></p>
+  </div>
 </aside>
 
 <!-- ===== ADMIN ===== -->
 <div id="admin" hidden>
   <div class="adm">
-    <div class="ah"><h2>ទំព័រគ្រប់គ្រង</h2><div style="display:flex;gap:8px"><a class="btn sec" href="#">← ត្រឡប់ទៅហាង</a><button class="btn sec" id="logout" hidden>ចាកចេញ</button></div></div>
-
-    <form id="login" class="form f" hidden style="margin:40px auto">
+    <div class="ah">
+      <h2>ទំព័រគ្រប់គ្រង</h2>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div class="cur-sw" role="group" aria-label="រូបិយប័ណ្ណ">
+          <button type="button" data-cur="KHR" class="on">៛ រៀល</button>
+          <button type="button" data-cur="USD">$ USD</button>
+        </div>
+        <a class="btn sec" href="#">← ត្រឡប់ទៅហាង</a>
+        <button class="btn sec" id="logout" hidden>ចាកចេញ</button>
+      </div>
+    </div>
+    <form id="login" class="form f" hidden style="margin:40px auto;border-radius:24px">
       <h3>ចូលគណនី</h3>
-      <div class="f"><label for="em">អ៊ីមែល</label><input id="em" type="email" required autocomplete="username"></div>
-      <div class="f"><label for="pw">លេខសម្ងាត់</label><input id="pw" type="password" required autocomplete="current-password"></div>
+      <div class="f"><label for="em">អ៊ីមែល</label><input class="in" id="em" type="email" required autocomplete="username"></div>
+      <div class="f"><label for="pw">លេខសម្ងាត់</label><input class="in" id="pw" type="password" required autocomplete="current-password"></div>
       <div class="err" id="lerr"></div>
       <button class="btn pri">ចូល</button>
     </form>
-
     <div id="dash">
       <div class="note" id="demo" hidden>Demo mode: changes are saved on this device only. Add your Firebase config to go live for all visitors.</div>
+      <div class="rate-bar" id="admRate">អត្រាប្តូរប្រាក់ប្រចាំថ្ងៃ៖ $1 = 4,100 ៛</div>
       <div class="stats">
         <div class="st"><b id="s1">0</b><span>ទំនិញសរុប</span></div>
         <div class="st"><b id="s2">0</b><span>មានស្តុក</span></div>
         <div class="st o"><b id="s3">0</b><span>អស់ស្តុក</span></div>
       </div>
-      <div class="ah"><button class="btn pri" id="addNew">+ បន្ថែមទំនិញ</button></div>
+      <button class="btn pri" id="addNew">+ បន្ថែមទំនិញ</button>
       <div class="flt"><input class="search" id="aq" type="search" placeholder="ស្វែងរកទំនិញ..."><select id="af" class="sel" aria-label="ប្រភេទ"></select></div>
       <div id="aList"></div>
     </div>
   </div>
 </div>
 
-<!-- modal -->
+<!-- modals -->
 <div class="modal" id="modal" hidden>
   <form class="form f" id="pform">
     <h3 id="mTitle">បន្ថែមទំនិញ</h3>
-    <div class="f"><label for="pn">ឈ្មោះទំនិញ</label><input id="pn" type="text" required maxlength="80"></div>
-    <div class="f"><label for="pp">តម្លៃ ($)</label><input id="pp" type="number" step="0.01" min="0" required inputmode="decimal"></div>
-    <div class="f"><label for="pc">ប្រភេទ</label><select id="pc"></select></div>
-    <div class="f"><label>រូបភាព</label>
-      <div class="up"><div class="pv" id="pv">🔧</div>
+    <div class="f"><label for="pn">ឈ្មោះទំនិញ</label><input class="in" id="pn" type="text" required maxlength="80"></div>
+    <div class="f">
+      <label for="pp">តម្លៃ</label>
+      <div class="price-in">
+        <input class="in" id="pp" type="number" step="any" min="0" required inputmode="decimal">
+        <select class="sel" id="pcur" aria-label="រូបិយប័ណ្ណតម្លៃ">
+          <option value="KHR">៛ (រៀល)</option>
+          <option value="USD">$ (ដុល្លារ)</option>
+        </select>
+      </div>
+      <small class="conv-pv" id="convPv"></small>
+    </div>
+    <div class="f"><label for="pc">ប្រភេទ</label><select class="sel" id="pc"></select></div>
+    <div class="f"><label>រូបភាព (កាត់ជាការ៉េ 1:1 ដោយស្វ័យប្រវត្តិ)</label>
+      <div class="up"><div class="pv" id="pv"></div>
         <div style="display:grid;gap:8px"><input type="file" id="pf" accept="image/*" style="font-size:13px"><button type="button" class="ib" id="pclr">លុបរូបភាព</button></div></div>
-      <input type="text" id="pu" placeholder="ឬបិទភ្ជាប់តំណរូបភាព https://..." style="margin-top:10px"></div>
+      <input class="in" type="text" id="pu" placeholder="ឬបិទភ្ជាប់តំណរូបភាព https://..." style="margin-top:10px"></div>
     <label class="chk"><span class="sw"><input type="checkbox" id="ps" checked><i></i></span> មានស្តុក</label>
     <div class="acts"><button type="button" class="btn sec" id="mcancel">បោះបង់</button><button class="btn pri">រក្សាទុក</button></div>
   </form>
 </div>
-<div class="modal" id="invm" hidden><div class="form f" style="max-width:480px">
-  <div style="display:flex;justify-content:space-between;align-items:center"><h3>វិក្កយបត្រ</h3><button class="x" id="invx" aria-label="បិទ">×</button></div>
-  <img id="invimg" alt="invoice" style="width:100%;border-radius:10px;border:1px solid var(--line)">
-  <button class="btn pri" id="invsend">✈️ ផ្ញើវិក្កយបត្រទៅ Telegram</button>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><button class="btn sec" id="invjpg">⬇ JPEG</button><button class="btn sec" id="invpdf">⬇ PDF</button><a class="btn sec" id="invtg" target="_blank" rel="noopener">បើកជជែក</a></div>
-</div></div>
-<div class="modal" id="callm" hidden><div class="form f" style="max-width:360px"><h3>ទូរសព្ទមកហាង</h3><div id="callList" style="display:grid;gap:10px"></div><button class="btn sec" id="callx">បិទ</button></div></div>
+<div class="modal" id="callm" hidden><div class="form f"><h3>ទូរសព្ទមកហាង</h3><div class="callrow" id="callList"></div><button class="btn sec" id="callx">បិទ</button></div></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script type="module">
@@ -219,6 +141,9 @@ const FIREBASE_CONFIG = {
   appId: "1:410063645368:web:ce9dcbc71b4bf20279624d"
 };
 const CATS = ['សំបក','ពោះវៀន','ច្រវ៉ាក់ឈុត','ខ្ចៅ','អំពូល','កុងតាក់','គ្រឿងជ័រ','គ្រឿងក្រៅ','ប្រេងម៉ាស៊ីន','ផ្សេងៗ'];
+// Direct-to-Telegram sending (optional). Leave both empty to use the simple link mode.
+const ORDER = { botToken:'', chatId:'' };
+const DEFAULT_RATE = 4100; // Fallback USD to KHR rate if offline
 /* ================================================================== */
 
 const SEED = [
@@ -228,9 +153,76 @@ const SEED = [
 ];
 
 const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money = n => '$' + (+n).toFixed(2).replace(/\.00$/, '');
 const ALL = 'ទាំងអស់';
+const ico = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+
+/* ---------- Currency & Daily Exchange Rate ---------- */
+let cur = localStorage.getItem('jt_cur') || 'KHR'; // Default to Khmer Riel (៛)
+let rate = DEFAULT_RATE;
+
+const fmtUSD = n => '$' + (+n).toFixed(2).replace(/\.00$/, '');
+const fmtKHR = n => {
+  const r = Math.round((+n) * rate / 100) * 100;
+  return r.toLocaleString('en-US') + ' ៛';
+};
+const money = (usd, c = cur) => c === 'KHR' ? fmtKHR(usd) : fmtUSD(usd);
+const moneyBoth = usd => `${fmtKHR(usd)} (${fmtUSD(usd)})`;
+
+async function initRate(){
+  const today = new Date().toISOString().slice(0,10);
+  try{
+    const cached = JSON.parse(localStorage.getItem('jt_rate_cache'));
+    if(cached && cached.date === today && cached.rate > 3000){
+      rate = cached.rate;
+      updateRateUI();
+      refresh();
+      return;
+    }
+  }catch(e){}
+  const urls = [
+    'https://open.er-api.com/v6/latest/USD',
+    'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
+  ];
+  for(const u of urls){
+    try{
+      const res = await fetch(u);
+      if(!res.ok) continue;
+      const data = await res.json();
+      const fetched = data?.rates?.KHR || data?.usd?.khr;
+      if(fetched && fetched > 3000 && fetched < 6000){
+        rate = Math.round(fetched);
+        try{ localStorage.setItem('jt_rate_cache', JSON.stringify({date:today, rate})); }catch(e){}
+        break;
+      }
+    }catch(e){}
+  }
+  updateRateUI();
+  refresh();
+}
+
+function updateRateUI(){
+  const txt = `អត្រាប្តូរប្រាក់ថ្ងៃនេះ៖ $1 = ${rate.toLocaleString('en-US')} ៛`;
+  if($('#rateInfo')) $('#rateInfo').textContent = txt;
+  if($('#admRate')) $('#admRate').textContent = txt;
+  $$('.cur-sw button').forEach(b => b.classList.toggle('on', b.dataset.cur === cur));
+}
+
+function setCur(newCur){
+  if(newCur !== 'KHR' && newCur !== 'USD') return;
+  cur = newCur;
+  try{ localStorage.setItem('jt_cur', cur); }catch(e){}
+  updateRateUI();
+  refresh();
+  if(!$('#modal').hidden) updateConvPv();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('.cur-sw button');
+  if(b) setCur(b.dataset.cur);
+});
+
+/* ---------- Category SVG Art ---------- */
 const R=(n,f)=>[...Array(n)].map((_,i)=>f(i)).join('');
 const TIRE='<circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="42"/><circle cx="100" cy="100" r="10"/>'+R(5,i=>`<path transform="rotate(${i*72} 100 100)" d="M100 90V58"/>`);
 const GEAR=R(8,i=>`<path transform="rotate(${i*45} 100 100)" d="M93 54h14v16H93z"/>`)+'<circle cx="100" cy="100" r="38"/><circle cx="100" cy="100" r="14"/>';
@@ -292,32 +284,36 @@ function renderShop(){
    <article class="card ${p.stock?'':'out'}">
     <div class="im">${pic(p)}${p.stock?'':'<b class="tag">អស់ស្តុក</b>'}</div>
     <div class="bd"><small>${esc(p.cat)}</small><h3>${esc(p.name)}</h3>
-     <div class="row"><span class="price">${money(p.price)}</span><button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button></div></div>
+     <div class="row"><div class="pwrap"><span class="price num">${money(p.price)}</span><small class="subp">${money(p.price, cur==='KHR'?'USD':'KHR')}</small></div>${cart[p.id]?`<div class="step"><button data-m="${esc(p.id)}" aria-label="ដក">−</button><b>${cart[p.id]}</b><button data-p="${esc(p.id)}" aria-label="បន្ថែម">+</button></div>`:`<button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button>`}</div></div>
    </article>`).join(''):'<div class="empty">រកមិនឃើញទំនិញទេ</div>';
 }
 function renderCart(){
   const rows=Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p&&r.p.stock);
   cart=Object.fromEntries(rows.map(r=>[r.p.id,r.n]));
   const total=rows.reduce((s,r)=>s+r.p.price*r.n,0), cnt=rows.reduce((s,r)=>s+r.n,0);
-  $('#cc').textContent=cnt; $('#cartTotal').textContent=money(total);
-  const fb=$('#fab'); fb.hidden=!cnt; fb.innerHTML=`🛒 ${cnt} ទំនិញ <b>${money(total)}</b> · មើលកន្ត្រក`;
+  $('#cc').textContent=cnt;
+  $('#cartTotal').innerHTML=`${money(total)} <small class="sub-tot">(${money(total, cur==='KHR'?'USD':'KHR')})</small>`;
+  const fb=$('#fab'); fb.hidden=!cnt; fb.innerHTML=`${ico('cart')}<span>${cnt} ទំនិញ · មើលកន្ត្រក</span><b>${money(total)}</b>`;
   $('#order').disabled=!cnt;
+  $('#dlJpg').disabled=!cnt;
+  $('#dlPdf').disabled=!cnt;
   $('#cartList').innerHTML=rows.length?rows.map(r=>`
-   <div class="ci"><div>${esc(r.p.name)}<em>${money(r.p.price*r.n)}</em></div>
-   <div class="q"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><span>${r.n}</span><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
+   <div class="ci"><div>${esc(r.p.name)}<em>${money(r.p.price*r.n)} <small>(${money(r.p.price*r.n, cur==='KHR'?'USD':'KHR')})</small></em></div>
+   <div class="step"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><b>${r.n}</b><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
    :'<div class="empty" style="padding:40px 0">កន្ត្រកទទេ។ សូមជ្រើសរើសទំនិញ។</div>';
 }
 const cartOpen=on=>{ $('#drawer').classList.toggle('on',on); $('#veil').classList.toggle('on',on); };
 
 $('#cats').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b)return; cat=b.dataset.c; renderCats(); renderShop(); };
 $('#q').oninput=e=>{ q=e.target.value; renderShop(); };
-$('#grid').onclick=e=>{ const b=e.target.closest('.add'); if(!b||b.disabled)return; const id=b.dataset.id; cart[id]=(cart[id]||0)+1; renderCart(); toast('បានបន្ថែមទៅកន្ត្រក ✓'); };
-$('#cartList').onclick=e=>{
-  const m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
-  if(p) cart[p.dataset.p]++;
-  if(m){ const id=m.dataset.m; if(--cart[id]<=0) delete cart[id]; }
-  renderCart();
+const change=(id,d)=>{ cart[id]=(cart[id]||0)+d; if(cart[id]<=0) delete cart[id]; refresh(); for(const el of [$('#cc'),$('#fab')]){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); } };
+const cartClick=e=>{
+  const a=e.target.closest('.add'), m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
+  if(a&&!a.disabled){ change(a.dataset.id,1); toast('បានបន្ថែមទៅកន្ត្រក ✓'); }
+  else if(p) change(p.dataset.p,1);
+  else if(m) change(m.dataset.m,-1);
 };
+$('#grid').onclick=$('#cartList').onclick=cartClick;
 $('#openCart').onclick=()=>cartOpen(true); $('#closeCart').onclick=$('#veil').onclick=()=>cartOpen(false);
 
 /* ---------- admin ---------- */
@@ -331,7 +327,7 @@ function renderAdmin(){
   $('#aList').innerHTML=list.length?list.map(p=>`
    <div class="ar ${p.stock?'':'o'}">
     <div class="th">${pic(p)}</div>
-    <div class="ai"><b>${esc(p.name)}</b><span>${money(p.price)} · ${esc(p.cat)}</span></div>
+    <div class="ai"><b>${esc(p.name)}</b><span>${money(p.price)} (${money(p.price, cur==='KHR'?'USD':'KHR')}) · ${esc(p.cat)}</span></div>
     <label class="sw" title="មានស្តុក / អស់ស្តុក"><input type="checkbox" data-s="${esc(p.id)}" ${p.stock?'checked':''} aria-label="មានស្តុក"><i></i></label>
     <button class="ib" data-e="${esc(p.id)}">កែប្រែ</button><button class="ib d" data-d="${esc(p.id)}">លុប</button>
    </div>`).join(''):'<div class="empty" style="padding:40px 0">មិនទាន់មានទំនិញ។ ចុច «+ បន្ថែមទំនិញ» ដើម្បីចាប់ផ្តើម។</div>';
@@ -360,10 +356,38 @@ $('#login').onsubmit=async e=>{
 const setPv=()=>{ $('#pv').innerHTML=pic({img,cat:$('#pc').value,name:''}); };
 $('#pc').onchange=setPv;
 $('#pu').oninput=e=>{ const v=e.target.value.trim(); img=/^https?:\/\//i.test(v)?v:''; setPv(); };
+
+function updateConvPv(){
+  const val = +$('#pp').value || 0;
+  const c = $('#pcur').value;
+  if(!val){ $('#convPv').textContent = ''; return; }
+  const usd = c === 'KHR' ? (val / rate) : val;
+  $('#convPv').textContent = c === 'KHR'
+    ? `≈ ${fmtUSD(usd)} (គណនាតាមអត្រា $1 = ${rate.toLocaleString('en-US')} ៛)`
+    : `≈ ${fmtKHR(usd)} (គណនាតាមអត្រា $1 = ${rate.toLocaleString('en-US')} ៛)`;
+}
+$('#pp').oninput = updateConvPv;
+$('#pcur').onchange = () => {
+  const val = +$('#pp').value || 0;
+  if(val){
+    if($('#pcur').value === 'KHR') $('#pp').value = Math.round(val * rate / 100) * 100;
+    else $('#pp').value = +(val / rate).toFixed(2);
+  }
+  updateConvPv();
+};
+
 function openForm(id){
   const p=items.find(x=>x.id===id); editId=p?p.id:null; img=p?p.img||'':'';
   $('#mTitle').textContent=p?'កែប្រែទំនិញ':'បន្ថែមទំនិញ';
-  $('#pn').value=p?p.name:''; $('#pp').value=p?p.price:''; $('#pc').value=p?p.cat:CATS[0];
+  $('#pn').value=p?p.name:'';
+  $('#pcur').value=cur;
+  if(p){
+    $('#pp').value = cur === 'KHR' ? (Math.round(p.price * rate / 100) * 100) : p.price;
+  }else{
+    $('#pp').value = '';
+  }
+  updateConvPv();
+  $('#pc').value=p?p.cat:CATS[0];
   $('#ps').checked=p?!!p.stock:true; $('#pf').value=''; $('#pu').value=/^http/.test(img)?img:''; setPv();
   $('#modal').hidden=false; $('#pn').focus();
 }
@@ -384,94 +408,153 @@ $('#pf').onchange=e=>{
 $('#pform').onsubmit=async e=>{
   e.preventDefault();
   const old=items.find(x=>x.id===editId);
-  const p={id:editId||'p'+Date.now().toString(36), name:$('#pn').value.trim(), price:+$('#pp').value||0, cat:$('#pc').value, stock:$('#ps').checked, img, t:old?.t||Date.now()};
+  const rawPrice = +$('#pp').value || 0;
+  const priceUSD = $('#pcur').value === 'KHR' ? +(rawPrice / rate).toFixed(4) : rawPrice;
+  const p={id:editId||'p'+Date.now().toString(36), name:$('#pn').value.trim(), price:priceUSD, cat:$('#pc').value, stock:$('#ps').checked, img, t:old?.t||Date.now()};
   await DB.save(p); closeForm(); toast('បានរក្សាទុក ✓');
 };
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeForm(); cartOpen(false); } });
 
-/* ---------- call sheet + invoice ---------- */
+/* ---------- call sheet + Direct Telegram order + Optional JPG/PDF Invoice ---------- */
 const fmtPh=p=>p.replace(/(\d{3})(\d{3})(\d{3})/,'$1 $2 $3');
-const save=(u,n)=>{ const a=document.createElement('a'); a.href=u; a.download=n; document.body.appendChild(a); a.click(); a.remove(); };
-let inv=null;
-$('#callBtn').onclick=()=>{ $('#callList').innerHTML=SHOP.phones.map(p=>`<a class="btn pri" href="tel:${p}">📞 ${fmtPh(p)}</a>`).join(''); $('#callm').hidden=false; };
+const saveFile=(u,n)=>{ const a=document.createElement('a'); a.href=u; a.download=n; document.body.appendChild(a); a.click(); a.remove(); };
+$('#callBtn').onclick=()=>{ $('#callList').innerHTML=SHOP.phones.map(p=>`<a class="btn call" href="tel:${p}">${ico('call')} ${fmtPh(p)}</a>`).join(''); $('#callm').hidden=false; };
 $('#callx').onclick=()=>{ $('#callm').hidden=true; };
 $('#fab').onclick=()=>cartOpen(true);
-async function makeInvoice(){
+
+const BOT=!!(ORDER.botToken&&ORDER.chatId);
+$('#hint').textContent=BOT?'ការកម្មង់នឹងផ្ញើទៅហាងភ្លាមៗ':'Telegram នឹងបើកជាមួយសារដែលរៀបចំរួច — គ្រាន់តែចុចផ្ញើ';
+
+function buildOrder(){
   const rows=Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p);
-  try{ await Promise.all([['400 20px "Kantumruy Pro"','កខ'],['700 20px "Kantumruy Pro"','កខ'],['500 20px Oswald','1A'],['700 36px Oswald','1A']].map(a=>document.fonts.load(...a))); }catch(e){}
-  const W=800,RH=56,H=rows.length*RH+560,c=document.createElement('canvas'); c.width=W; c.height=H;
+  const total=rows.reduce((s,r)=>s+r.p.price*r.n,0), nm=$('#cn').value.trim(), ph=$('#cp').value.trim();
+  return [
+    '🛒 ការកម្មង់ថ្មី · '+SHOP.name,
+    '',
+    ...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${money(r.p.price*r.n)}`),
+    '',
+    `💰 សរុប៖ ${moneyBoth(total)}`,
+    ...(nm?['👤 '+nm]:[]),
+    ...(ph?['📞 '+ph]:[])
+  ].join('
+');
+}
+
+$('#order').onclick=async()=>{
+  if(!Object.keys(cart).length) return;
+  const text=buildOrder(), btn=$('#order');
+  if(!BOT){ window.open('https://t.me/'+SHOP.telegram+'?text='+encodeURIComponent(text),'_blank','noopener'); return; }
+  if(!$('#cp').value.trim()){ toast('សូមបញ្ចូលលេខទូរសព្ទរបស់អ្នក'); $('#cp').focus(); return; }
+  btn.disabled=true;
+  try{
+    const r=await fetch(`https://api.telegram.org/bot${ORDER.botToken}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:ORDER.chatId,text})});
+    if(!r.ok) throw new Error(r.status);
+    cart={}; refresh(); cartOpen(false); toast('✓ បានផ្ញើការកម្មង់ហើយ! យើងនឹងទាក់ទងអ្នកឆាប់ៗ');
+  }catch(e){ console.error(e); btn.disabled=false; toast('ផ្ញើមិនបាន — សូមព្យាយាមម្តងទៀត'); }
+};
+
+/* ---------- Optional Invoice Generator (JPG / PDF) ---------- */
+async function renderInvoiceCanvas(){
+  const rows=Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p);
+  try{ await Promise.all([['400 20px "Kantumruy Pro"','កខ'],['700 20px "Kantumruy Pro"','កខ'],['500 20px Oswald','1A'],['700 32px Oswald','1A']].map(a=>document.fonts.load(...a))); }catch(e){}
+  const W=800, RH=58, H=rows.length*RH+580, c=document.createElement('canvas'); c.width=W; c.height=H;
   const x=c.getContext('2d'), F=(w,s,f='Kantumruy Pro')=>{ x.font=`${w} ${s}px "${f}",sans-serif`; };
   const T=(t,px,py,al='left',col='#333')=>{ x.textAlign=al; x.fillStyle=col; x.fillText(t,px,py); };
   x.textBaseline='middle'; x.fillStyle='#fff'; x.fillRect(0,0,W,H);
-  x.fillStyle='#121214'; x.fillRect(0,0,W,124); x.fillStyle='#c59b27'; x.fillRect(0,124,W,6);
-  F(700,40); T(SHOP.name,40,48,'left','#e0b63f'); F(400,20); T(SHOP.tagline,40,90,'left','#d8d8de');
+  x.fillStyle='#121214'; x.fillRect(0,0,W,124); x.fillStyle='#d4a62a'; x.fillRect(0,124,W,6);
+  F(700,40); T(SHOP.name,40,48,'left','#f0c54a'); F(400,20); T(SHOP.tagline,40,90,'left','#d8d8de');
   F(700,36,'Oswald'); T('INVOICE',W-40,48,'right','#fff'); F(400,20); T('វិក្កយបត្រ',W-40,90,'right','#d8d8de');
   const d=new Date(), p2=n=>String(n).padStart(2,'0');
   const no='INV-'+String(d.getFullYear()).slice(2)+p2(d.getMonth()+1)+p2(d.getDate())+'-'+p2(d.getHours())+p2(d.getMinutes());
-  F(400,20); T('លេខ៖ '+no,40,166); T('កាលបរិច្ឆេទ៖ '+d.toLocaleDateString('en-GB')+' '+p2(d.getHours())+':'+p2(d.getMinutes()),40,198);
-  const cu=$('#cust').value.trim(); if(cu) T('អតិថិជន៖ '+cu,40,230);
+  F(400,19); T('លេខ៖ '+no,40,164); T('កាលបរិច្ឆេទ៖ '+d.toLocaleDateString('en-GB')+' '+p2(d.getHours())+':'+p2(d.getMinutes()),40,194);
+  T(`អត្រាប្តូរប្រាក់៖ $1 = ${rate.toLocaleString('en-US')} ៛`, W-40, 164, 'right', '#555');
+  const cu=[$('#cn').value.trim(), $('#cp').value.trim()].filter(Boolean).join(' · ');
+  if(cu) T('អតិថិជន៖ '+cu,40,224);
   x.fillStyle='#f1f1f4'; x.fillRect(40,256,720,46);
-  F(700,18); T('#',56,279); T('ទំនិញ',90,279); T('ចំនួន',520,279,'right'); T('តម្លៃ',640,279,'right'); T('សរុប',760,279,'right');
+  F(700,18); T('#',56,279); T('ទំនិញ',90,279); T('ចំនួន',490,279,'right'); T('តម្លៃ',620,279,'right'); T('សរុប',750,279,'right');
   let total=0;
   rows.forEach((r,i)=>{
     const y=302+i*RH+RH/2, amt=r.p.price*r.n; total+=amt;
-    let t=r.p.name; F(400,19); while(x.measureText(t).width>380&&t.length>1) t=t.slice(0,-1); if(t!==r.p.name) t+='…';
-    T(String(i+1),56,y); T(t,90,y); F(500,20,'Oswald'); T('x'+r.n,520,y,'right'); T(money(r.p.price),640,y,'right'); T(money(amt),760,y,'right','#111');
+    let t=r.p.name; F(400,19); while(x.measureText(t).width>350&&t.length>1) t=t.slice(0,-1); if(t!==r.p.name) t+='…';
+    T(String(i+1),56,y); T(t,90,y); F(500,19,'Oswald'); T('x'+r.n,490,y,'right');
+    F(600,18); T(money(r.p.price),620,y,'right'); T(money(amt),750,y,'right','#111');
     x.fillStyle='#e5e5ea'; x.fillRect(40,302+(i+1)*RH-1,720,1);
   });
-  const ty=302+rows.length*RH+28;
-  x.fillStyle='#121214'; x.fillRect(400,ty,360,70); F(700,22); T('សរុប',424,ty+35,'left','#fff'); F(700,34,'Oswald'); T(money(total),736,ty+35,'right','#e0b63f');
-  F(400,19); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+120); T('ទូរសព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+156); T('Telegram: @'+SHOP.telegram,40,ty+188);
+  const ty=302+rows.length*RH+24;
+  x.fillStyle='#121214'; x.fillRect(360,ty,400,82);
+  F(700,22); T('សរុប',384,ty+28,'left','#fff');
+  F(700,26); T(fmtKHR(total),740,ty+26,'right','#f0c54a');
+  F(500,18,'Oswald'); T(fmtUSD(total),740,ty+58,'right','#d8d8de');
+  F(400,18); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+130); T('ទូរសព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+162); T('Telegram: @'+SHOP.telegram,40,ty+192);
   const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.92));
-  if(inv) URL.revokeObjectURL(inv.url);
-  inv={blob,url:URL.createObjectURL(blob),w:W,h:H,no,
-    msg:'សួស្តី! ខ្ញុំចង់កម្មង់៖\n'+rows.map(r=>`- ${r.p.name} x${r.n} = ${money(r.p.price*r.n)}`).join('\n')+'\nសរុប៖ '+money(total)+'\nវិក្កយបត្រ៖ '+no};
+  return {blob, w:W, h:H, no};
 }
+
 function pdfParts(j,w,h){
   const E=new TextEncoder(), W=595, H=Math.round(W*h/w), ct=`q ${W} 0 0 ${H} 0 0 cm /I Do Q`;
   const objs=['<</Type/Catalog/Pages 2 0 R>>','<</Type/Pages/Kids[3 0 R]/Count 1>>',
    `<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${W} ${H}]/Resources<</XObject<</I 4 0 R>>>>/Contents 5 0 R>>`,
-   [`<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${j.length}>>\nstream\n`,j,'\nendstream'],
-   `<</Length ${ct.length}>>\nstream\n${ct}\nendstream`];
-  const out=[E.encode('%PDF-1.4\n')], offs=[]; let pos=out[0].length;
-  objs.forEach((o,i)=>{ offs.push(pos); [`${i+1} 0 obj\n`,...[].concat(o),'\nendobj\n'].map(q=>typeof q==='string'?E.encode(q):q).forEach(q=>{ out.push(q); pos+=q.length; }); });
-  out.push(E.encode('xref\n0 6\n0000000000 65535 f \n'+offs.map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${pos}\n%%EOF`));
+   [`<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${j.length}>>
+stream
+`,j,'
+endstream'],
+   `<</Length ${ct.length}>>
+stream
+${ct}
+endstream`];
+  const out=[E.encode('%PDF-1.4
+')], offs=[]; let pos=out[0].length;
+  objs.forEach((o,i)=>{ offs.push(pos); [`${i+1} 0 obj
+`,...[].concat(o),'
+endobj
+'].map(q=>typeof q==='string'?E.encode(q):q).forEach(q=>{ out.push(q); pos+=q.length; }); });
+  out.push(E.encode('xref
+0 6
+0000000000 65535 f 
+'+offs.map(o=>String(o).padStart(10,'0')+' 00000 n 
+').join('')+`trailer
+<</Size 6/Root 1 0 R>>
+startxref
+${pos}
+%%EOF`));
   return out;
 }
-$('#order').onclick=async()=>{
+
+$('#dlJpg').onclick=async()=>{
   if(!Object.keys(cart).length) return;
-  toast('កំពុងបង្កើតវិក្កយបត្រ...');
-  try{ await makeInvoice(); }catch(e){ console.error(e); toast('Cannot create invoice'); return; }
-  $('#invimg').src=inv.url; cartOpen(false); $('#invm').hidden=false;
+  toast('កំពុងរក្សាទុករូបភាព...');
+  try{
+    const inv = await renderInvoiceCanvas();
+    const u = URL.createObjectURL(inv.blob);
+    saveFile(u, inv.no+'.jpg');
+    setTimeout(()=>URL.revokeObjectURL(u), 5000);
+  }catch(e){ console.error(e); toast('មិនអាចបង្កើតវិក្កយបត្របានទេ'); }
 };
-$('#invjpg').onclick=()=>save(inv.url,inv.no+'.jpg');
-$('#invpdf').onclick=async()=>{
-  const b=new Uint8Array(await inv.blob.arrayBuffer());
-  const u=URL.createObjectURL(new Blob(pdfParts(b,inv.w,inv.h),{type:'application/pdf'}));
-  save(u,inv.no+'.pdf'); setTimeout(()=>URL.revokeObjectURL(u),5000);
+
+$('#dlPdf').onclick=async()=>{
+  if(!Object.keys(cart).length) return;
+  toast('កំពុងរក្សាទុក PDF...');
+  try{
+    const inv = await renderInvoiceCanvas();
+    const b = new Uint8Array(await inv.blob.arrayBuffer());
+    const u = URL.createObjectURL(new Blob(pdfParts(b,inv.w,inv.h),{type:'application/pdf'}));
+    saveFile(u, inv.no+'.pdf');
+    setTimeout(()=>URL.revokeObjectURL(u), 5000);
+  }catch(e){ console.error(e); toast('មិនអាចបង្កើត PDF បានទេ'); }
 };
-$('#invsend').onclick=async()=>{
-  const file=new File([inv.blob],inv.no+'.jpg',{type:'image/jpeg'});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){
-    try{ await navigator.share({files:[file],title:SHOP.name,text:inv.msg}); return; }catch(e){ if(e.name==='AbortError') return; }
-  }
-  save(inv.url,inv.no+'.jpg');
-  if(navigator.clipboard) navigator.clipboard.writeText(inv.msg).catch(()=>{});
-  toast('បានរក្សាទុកវិក្កយបត្រ — សូមភ្ជាប់ (Attach) ក្នុង Telegram');
-  setTimeout(()=>window.open('https://t.me/'+SHOP.telegram,'_blank','noopener'),900);
-};
-$('#invx').onclick=()=>{ $('#invm').hidden=true; };
-document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.hidden=true; }));
-addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal').forEach(m=>{ m.hidden=true; }); });
+
+$$('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.hidden=true; }));
+addEventListener('keydown',e=>{ if(e.key==='Escape') $$('.modal').forEach(m=>{ m.hidden=true; }); });
 
 /* ---------- boot ---------- */
 function refresh(){ renderShop(); renderCart(); if(!$('#admin').hidden) renderAdmin(); }
 function route(){ const a=location.hash==='#admin'; $('#shop').hidden=a; $('#admin').hidden=!a; cartOpen(false); if(a) renderAdmin(); scrollTo(0,0); }
 $('#sName').textContent=SHOP.name; $('#sTag').textContent=SHOP.tagline; $('#fName').textContent='© '+SHOP.name;
-$('#invtg').href='https://t.me/'+SHOP.telegram; $('#tgBtn').href='https://t.me/'+SHOP.telegram;
+$('#tgBtn').href='https://t.me/'+SHOP.telegram;
 $('#pc').innerHTML=CATS.map(c=>`<option>${esc(c)}</option>`).join('');
 $('#af').innerHTML='<option value="">ប្រភេទទាំងអស់</option>'+CATS.map(c=>`<option>${esc(c)}</option>`).join('');
-renderCats(); renderCart(); addEventListener('hashchange',route); route();
+updateRateUI(); renderCats(); renderCart(); $('#grid').innerHTML=R(6,()=>'<div class="skel"></div>'); addEventListener('hashchange',route); route();
+initRate();
 DB.init(refresh);
 </script>
 </body>
