@@ -48,10 +48,11 @@
   <div class="dl" id="cartList"></div>
   <div class="df">
     <div class="two"><input class="in" id="cn" type="text" placeholder="ឈ្មោះ" maxlength="40" autocomplete="name"><input class="in" id="cp" type="tel" placeholder="លេខទូរសព្ទ" maxlength="20" inputmode="tel" autocomplete="tel"></div>
+    <input class="in" id="ct" type="text" placeholder="Telegram @username (ស្រេចចិត្ត)" maxlength="33" autocomplete="off" autocapitalize="none" spellcheck="false">
     <div class="tot"><span>សរុប</span><span id="cartTotal">0៛</span></div>
     <p class="hint rt"></p>
     <button class="btn tg wide" id="order"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> ផ្ញើការកម្មង់ទៅ Telegram</button>
-    <p class="hint">ការកម្មង់នឹងត្រូវផ្ញើទៅហាងដោយផ្ទាល់ — យើងនឹងទាក់ទងអ្នកវិញតាមលេខទូរសព្ទ</p>
+    <p class="hint">ការកម្មង់ត្រូវបានផ្ញើទៅហាងដោយស្វ័យប្រវត្តិ ហើយ Telegram នឹងបើកសារដែលរៀបចំរួច — សូមចុចផ្ញើផងដែរ</p>
     <div class="two"><button class="btn sec" id="invjpg"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> JPG</button><button class="btn sec" id="invpdf"><svg class="ic" aria-hidden="true"><use href="#i-dl"/></svg> PDF</button></div>
     <p class="hint">រក្សាទុកវិក្កយបត្រ (ស្រេចចិត្ត) — មិនផ្ញើដោយស្វ័យប្រវត្តិទេ</p>
   </div>
@@ -106,6 +107,7 @@
 <script type="module">
 /* =====================  SETTINGS — edit these  ===================== */
 const SHOP = { name:'ជាងទ្រី', tagline:'លក់គ្រឿងបន្លាស់ម៉ូតូ', phones:['070289000','090289000'], telegram:'MR_CHANTRY007' };
+const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';   // Cloudflare Worker that forwards orders to your bot
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyA0jKf5ddks3xa2I5UaaZ2IxUfezi-0LAg",
   authDomain: "cheangtry-9149b.firebaseapp.com",
@@ -335,33 +337,50 @@ const fmtPh=p=>p.replace(/(\d{3})(\d{3})(\d{3})/,'$1 $2 $3');
 $('#callBtn').onclick=()=>{ $('#callList').innerHTML=SHOP.phones.map(p=>`<a class="btn call" href="tel:${p}">${ico('call')} ${fmtPh(p)}</a>`).join(''); $('#callm').hidden=false; };
 $('#callx').onclick=()=>{ $('#callm').hidden=true; };
 $('#fab').onclick=()=>cartOpen(true);
-function buildOrder(){
-  const rows=cartRows(), total=rows.reduce((s,r)=>s+r.amt,0), nm=$('#cn').value.trim(), ph=$('#cp').value.trim(), o=other(cur);
-  return ['🛒 ការកម្មង់ថ្មី · '+SHOP.name,'',...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${fmt(r.amt)}`),'','💰 សរុប៖ '+fmt(total)+` (≈ ${fmt(conv(total,cur,o),o)})`,...(nm?['👤 '+nm]:[]),...(ph?['📞 '+ph]:[])].join('\n');
-}
-// Opens Telegram with the message typed in — the customer taps Send. Nothing is sent automatically.
-const ORDER_URL = 'https://chantryshop.nhajulw.workers.dev/';
 
+function buildOrder(){
+  const rows=cartRows(), total=rows.reduce((s,r)=>s+r.amt,0), o=other(cur);
+  const nm=$('#cn').value.trim(), ph=$('#cp').value.trim();
+  const tg=$('#ct').value.trim().replace(/^https?:\/\/t\.me\//i,'').replace(/[^A-Za-z0-9_]/g,'');
+  return ['🛒 ការកម្មង់ថ្មី · '+SHOP.name,'',
+    ...rows.map((r,i)=>`${i+1}. ${r.p.name} x${r.n} = ${fmt(r.amt)}`),'',
+    '💰 សរុប៖ '+fmt(total)+` (≈ ${fmt(conv(total,cur,o),o)})`,'',
+    '👤 '+nm,
+    '📞 '+ph,
+    ...(tg?['✈️ Telegram: @'+tg]:[])
+  ].join('\n');
+}
+
+// 1) sends the order to your bot automatically (via the Worker)
+// 2) opens the customer's chat with you, message prefilled — they tap Send
 $('#order').onclick = async () => {
   if (!cartRows().length) return;
   if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរសព្ទ'); $('#cp').focus(); return; }
+  if (!$('#cn').value.trim()) { toast('សូមបញ្ចូលឈ្មោះ'); $('#cn').focus(); return; }
 
   const btn = $('#order');
   btn.disabled = true;
   const text = buildOrder();
+
+  // start the automatic send (don't await yet)
+  const relay = fetch(ORDER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  });
+
+  // open the chat in the same tap so the browser doesn't block it
+  window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+
+  // now check the automatic send
   try {
-    const r = await fetch(ORDER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text })
-    });
+    const r = await relay;
     if (!r.ok) throw new Error('relay ' + r.status);
-    toast('បានផ្ញើការកម្មង់ ✓');
+    toast('បានផ្ញើការកម្មង់ ✓ សូមចុចផ្ញើក្នុង Telegram ផងដែរ');
     cart = {}; refresh(); cartOpen(false);
   } catch (e) {
-    // fallback: customer taps Send in Telegram manually
-    window.open('https://t.me/' + SHOP.telegram + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-    toast('សូមចុចផ្ញើក្នុង Telegram');
+    console.error(e);
+    toast('សូមចុចផ្ញើក្នុង Telegram ដើម្បីបញ្ចប់ការកម្មង់');
   } finally {
     btn.disabled = !cartRows().length;
   }
