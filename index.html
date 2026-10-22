@@ -8,6 +8,8 @@
 <title>ជាងទ្រី - លក់គ្រឿងបន្លាស់ម៉ូតូ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=3">
 </head>
@@ -117,7 +119,7 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "410063645368",
   appId: "1:410063645368:web:ce9dcbc71b4bf20279624d"
 };
-const CATS = ['សំបក','ពោះវៀន','ច្រវ៉ាក់ឈុត','ខ្ចៅ','អំពូល','កុងតាក់','គ្រឿងជ័រ','គ្រឿងក្រៅ','ប្រេងម៉ាស៊ីន','ផ្សេងៗ'];
+const CATS = ['សំបក','ពោះវៀន','ច្រវ៉ាក់ឈុត','ខ្ចៅ','អំពូល','កុងតាក់','គ្រឿងជ័រ','គ្រឿងក្រៅ','ប្រេងម៉ាស៊ីន','គ្រឿងម៉ាស៊ីន','បូម','ហ្វឺត&រ៉ង','អាគុយ&ពីដាង','ខ្សែភ្លើង','គ្រឿងកង់','សោម៉ូតូ','ផ្សេងៗ'];
 const DEFAULT_CUR = 'KHR';          // site default currency: 'KHR' or 'USD'
 const FALLBACK_RATE = 4100;         // used only if the live rate can't be loaded and nothing is cached
 /* ================================================================== */
@@ -178,40 +180,84 @@ const ICON={'សំបក':TIRE,'ប្រេងម៉ាស៊ីន':OIL,'ខ�
  'អំពូល':'<path d="M100 40a38 38 0 0 1 20 70v14H80v-14a38 38 0 0 1 20-70z"/><path d="M84 140h32M90 156h20"/>',
  'កុងតាក់':'<rect x="60" y="40" width="80" height="120" rx="14"/><rect x="86" y="62" width="28" height="48" rx="8"/><path d="M80 136h40"/>',
  'គ្រឿងជ័រ':'<path d="M44 132c10-50 52-70 112-60l-8 22c-40-4-60 12-70 52z"/><path d="M60 146h70"/>',
- 'គ្រឿងក្រៅ':'<path d="M36 130c4-44 40-70 84-64 24 3 44 18 48 40l-30 4c-4-14-16-20-34-20-26 0-38 16-42 40z"/><circle cx="64" cy="144" r="12"/>'
+ 'គ្រឿងក្រៅ':'<path d="M36 130c4-44 40-70 84-64 24 3 44 18 48 40l-30 4c-4-14-16-20-34-20-26 0-38 16-42 40z"/><circle cx="64" cy="144" r="12"/>',
+ 'គ្រឿងម៉ាស៊ីន':'<rect x="46" y="84" width="108" height="70" rx="10"/><path d="M68 84V56h26v28M106 84V56h26v28M46 118H26M154 118h20M80 154v14M120 154v14"/>',
+ 'បូម':'<circle cx="100" cy="114" r="42"/><circle cx="100" cy="114" r="12"/><path d="M100 72V40h44M58 114H32M142 114h26"/>',
+ 'ហ្វឺត&រ៉ង':'<circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="20"/>'+R(6,i=>`<circle transform="rotate(${i*60} 100 100)" cx="100" cy="62" r="6"/>`),
+ 'អាគុយ&ពីដាង':'<rect x="38" y="76" width="124" height="76" rx="10"/><path d="M66 76V58h20v18M114 76V58h20v18M64 114h26M112 114h26M125 101v26"/>',
+ 'ខ្សែភ្លើង':'<path d="M34 70c46 0 24 60 66 60s22-60 66-60M34 128c46 0 24 40 66 40"/><rect x="18" y="56" width="18" height="28" rx="5"/><rect x="164" y="56" width="18" height="28" rx="5"/>',
+ 'គ្រឿងកង់':'<circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="12"/>'+R(8,i=>`<path transform="rotate(${i*45} 100 100)" d="M100 88V42"/>`),
+ 'សោម៉ូតូ':'<circle cx="62" cy="100" r="30"/><circle cx="62" cy="100" r="9"/><path d="M92 100h84M146 100v24M170 100v18"/>'
 };
 const art=c=>'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#33333c"/><stop offset="1" stop-color="#1e1e24"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><g fill="none" stroke="#c59b27" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">${ICON[c]||ICON['ផ្សេងៗ']}</g></svg>`);
 const pic=p=>`<img src="${esc(p.img||art(p.cat))}" data-c="${esc(p.cat)}" alt="${esc(p.name)}" loading="lazy">`;
 document.addEventListener('error',e=>{ const t=e.target; if(t.tagName==='IMG'&&!t.dataset.f&&t.dataset.c){ t.dataset.f=1; t.src=art(t.dataset.c); } },true);
-let items = [], cat = ALL, q = '', aq = '', af = '', cart = {}, editId = null, img = '';
+let items = [], cat = ALL, q = '', aq = '', af = '', cart = {}, editId = null, img = '', loaded = false;
 
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('on'),2600); }
 
-/* ---------- data layer (local demo OR Firebase) ---------- */
+/* ---------- data layer: instant cache -> fast REST load -> live Firebase (in background) ---------- */
+const fsVal = v => 'stringValue' in v ? v.stringValue : 'integerValue' in v ? +v.integerValue : 'doubleValue' in v ? v.doubleValue : 'booleanValue' in v ? v.booleanValue : null;
+async function fastLoad(){            // one small request, no Firebase SDK needed
+  const out = []; let tok = '';
+  do{
+    const u = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents/products?pageSize=300&key=${FIREBASE_CONFIG.apiKey}` + (tok ? '&pageToken=' + encodeURIComponent(tok) : '');
+    const r = await fetch(u); if(!r.ok) throw new Error('rest ' + r.status);
+    const j = await r.json();
+    for(const d of j.documents || []){ const o = { id: d.name.split('/').pop() }; for(const [k,v] of Object.entries(d.fields || {})) o[k] = fsVal(v); out.push(o); }
+    tok = j.nextPageToken || '';
+  }while(tok);
+  return out;
+}
 const DB = {
-  fb:null, user:null,
-  async init(onChange){
+  fb:null, user:null, authReady:false, live:false, app:null, _c:null,
+  init(){
     if(!FIREBASE_CONFIG){
       let l=null; try{ l=JSON.parse(localStorage.getItem('jt_products')); }catch(e){}
-      items = Array.isArray(l) ? l : SEED; onChange(); return;
+      items = Array.isArray(l) ? l : SEED; loaded = true; refresh(); return;
     }
-    try{
-      const V='10.12.2', base=`https://www.gstatic.com/firebasejs/${V}/`;
-      const [A,F,U] = await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-firestore.js'),import(base+'firebase-auth.js')]);
-      const app=A.initializeApp(FIREBASE_CONFIG), db=F.getFirestore(app), auth=U.getAuth(app);
-      this.fb={F,U,auth,col:F.collection(db,'products')};
-      U.onAuthStateChanged(auth,u=>{ this.user=u; if(!$('#admin').hidden) renderAdmin(); });
-      F.onSnapshot(this.fb.col,s=>{ items=s.docs.map(d=>({...d.data(),id:d.id})); onChange(); },e=>toast('Cannot load products: '+e.code));
-    }catch(e){ console.error(e); toast('Firebase error — check your config'); }
+    // 1) instant: the products this device saw last time
+    try{ const c=JSON.parse(LS.get('jt_cache')); if(Array.isArray(c)&&c.length){ items=c; loaded=true; refresh(); } }catch(e){}
+    // 2) fast: a single small request (does not wait for the Firebase SDK)
+    fastLoad().then(l=>{ if(this.live) return; items=l; loaded=true; this.cache(); refresh(); })
+      .catch(e=>console.warn('fast load failed',e));
+    // 3) live updates: load the Firebase SDK after the first paint
+    (window.requestIdleCallback||(f=>setTimeout(f,300)))(()=>this.connect().catch(e=>{ console.error(e); loaded=true; refresh(); toast('Firebase error — check your config'); }),{timeout:1500});
+  },
+  cache(){ LS.set('jt_cache',JSON.stringify(items.map(p=>({...p,img:/^data:/.test(p.img||'')?'':p.img})))); },   // photos stored inline are skipped to keep the cache small
+  connect(){
+    return this._c || (this._c = (async()=>{
+      const base='https://www.gstatic.com/firebasejs/10.12.2/';
+      const [A,F] = await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-firestore.js')]);
+      this.app=A.initializeApp(FIREBASE_CONFIG);
+      this.fb={F,U:null,auth:null,col:F.collection(F.getFirestore(this.app),'products')};
+      F.onSnapshot(this.fb.col,s=>{ this.live=true; items=s.docs.map(d=>({...d.data(),id:d.id})); loaded=true; this.cache(); refresh(); },
+        e=>{ loaded=true; refresh(); toast('Cannot load products: '+e.code); });
+    })());
+  },
+  async loadAuth(){                   // only needed on the admin page
+    await this.connect();
+    if(this.fb.U) return;
+    const U = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js');
+    this.fb.U=U; this.fb.auth=U.getAuth(this.app);
+    U.onAuthStateChanged(this.fb.auth,u=>{ this.user=u; this.authReady=true; if(!$('#admin').hidden) renderAdmin(); });
   },
   async save(p){
+    if(FIREBASE_CONFIG){
+      if(!this.fb){ toast('Still connecting — try again'); return; }
+      try{ await this.fb.F.setDoc(this.fb.F.doc(this.fb.col,p.id),p); }catch(e){ toast('Save failed: '+e.code); }
+      return;
+    }
     const i=items.findIndex(x=>x.id===p.id);
-    if(this.fb){ try{ await this.fb.F.setDoc(this.fb.F.doc(this.fb.col,p.id),p); }catch(e){ toast('Save failed: '+e.code); } return; }
     if(i>=0) items[i]=p; else items.unshift(p);
     this.persist();
   },
   async remove(id){
-    if(this.fb){ try{ await this.fb.F.deleteDoc(this.fb.F.doc(this.fb.col,id)); }catch(e){ toast('Delete failed: '+e.code); } return; }
+    if(FIREBASE_CONFIG){
+      if(!this.fb){ toast('Still connecting — try again'); return; }
+      try{ await this.fb.F.deleteDoc(this.fb.F.doc(this.fb.col,id)); }catch(e){ toast('Delete failed: '+e.code); }
+      return;
+    }
     items=items.filter(x=>x.id!==id); this.persist();
   },
   persist(){ try{ localStorage.setItem('jt_products',JSON.stringify(items)); }catch(e){ toast('Storage full — use smaller images'); } refresh(); }
@@ -222,6 +268,7 @@ function renderCats(){
   $('#cats').innerHTML=[ALL,...CATS].map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
 }
 function renderShop(){
+  if(!loaded){ if(!$('#grid .skel')){ $('#count').textContent=''; $('#grid').innerHTML=R(6,()=>'<div class="skel"></div>'); } return; }
   const list=items.filter(p=>(cat===ALL||p.cat===cat)&&p.name.toLowerCase().includes(q.toLowerCase()))
     .sort((a,b)=>(+!!b.stock)-(+!!a.stock)||(b.t||0)-(a.t||0));
   $('#count').textContent=`ទំនិញ ${list.length}`;
@@ -274,9 +321,9 @@ $('#openCart').onclick=()=>cartOpen(true); $('#closeCart').onclick=$('#veil').on
 
 /* ---------- admin ---------- */
 function renderAdmin(){
-  const need=!!DB.fb&&!DB.user;
-  $('#login').hidden=!need; $('#dash').hidden=need; $('#logout').hidden=!DB.user; $('#demo').hidden=!!DB.fb;
-  if(need) return;
+  const wait=!!FIREBASE_CONFIG&&!DB.authReady, need=!!DB.fb&&!DB.user;
+  $('#login').hidden=wait||!need; $('#dash').hidden=wait||need; $('#logout').hidden=!DB.user; $('#demo').hidden=!!FIREBASE_CONFIG;
+  if(wait||need) return;
   const out=items.filter(p=>!p.stock).length;
   $('#s1').textContent=items.length; $('#s2').textContent=items.length-out; $('#s3').textContent=out;
   const list=items.filter(p=>(!af||p.cat===af)&&p.name.toLowerCase().includes(aq.toLowerCase())).sort((a,b)=>(b.t||0)-(a.t||0));
@@ -485,14 +532,14 @@ addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('
 
 /* ---------- boot ---------- */
 function refresh(){ renderShop(); renderCart(); if(!$('#admin').hidden) renderAdmin(); }
-function route(){ const a=location.hash==='#admin'; $('#shop').hidden=a; $('#admin').hidden=!a; cartOpen(false); if(a) renderAdmin(); scrollTo(0,0); }
+function route(){ const a=location.hash==='#admin'; $('#shop').hidden=a; $('#admin').hidden=!a; cartOpen(false); if(a){ renderAdmin(); if(FIREBASE_CONFIG) DB.loadAuth().catch(e=>{ console.error(e); toast('Firebase error — check your config'); }); } scrollTo(0,0); }
 $('#sName').textContent=SHOP.name; $('#sTag').textContent=SHOP.tagline; $('#fName').textContent='© '+SHOP.name;
 $('#tgBtn').href='https://t.me/'+SHOP.telegram;
 $('#pc').innerHTML=CATS.map(c=>`<option>${esc(c)}</option>`).join('');
 $('#af').innerHTML='<option value="">ប្រភេទទាំងអស់</option>'+CATS.map(c=>`<option>${esc(c)}</option>`).join('');
 renderCats(); renderCart(); paintCur(); $('#grid').innerHTML=R(6,()=>'<div class="skel"></div>'); addEventListener('hashchange',route); route();
 loadRate().then(refresh);
-DB.init(refresh);
+DB.init();
 </script>
 </body>
 </html>
