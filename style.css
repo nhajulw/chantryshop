@@ -99,7 +99,8 @@ main{padding:14px 4% 110px}
 .step{display:flex;align-items:center;background:var(--raised);border-radius:12px;overflow:hidden}
 .step button{width:38px;height:40px;font-size:20px;color:var(--gold-hi)}
 .step button:active{background:var(--line)}
-.step b{min-width:22px;text-align:center;font-family:Oswald,sans-serif}
+.step b{.qty{width:42px;align-self:stretch;min-height:38px;padding:0;border:0;border-radius:0;background:transparent;color:var(--txt);text-align:center;font:700 16px Oswald,sans-serif;-moz-appearance:textfield;appearance:textfield}
+.qty:focus{outline:0;background:var(--bg);box-shadow:inset 0 0 0 2px var(--gold)}}
 .empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:56px 0}
 .skel{height:270px;border-radius:var(--r);background:linear-gradient(100deg,var(--surface) 30%,var(--raised) 50%,var(--surface) 70%) 0 0/300% 100%;animation:shine 1.3s linear infinite}
 @keyframes shine{to{background-position:-300% 0}}
@@ -194,7 +195,8 @@ footer a{color:var(--mute)}
 .q{display:flex;align-items:center;background:var(--raised);border-radius:12px;overflow:hidden}
 .q button{width:36px;height:38px;font-size:20px;color:var(--gold-hi)}
 .q button:active{background:var(--line)}
-.q span{min-width:22px;text-align:center;font-family:Oswald,sans-serif;font-weight:700}
+.q span{.qty{width:42px;align-self:stretch;min-height:38px;padding:0;border:0;border-radius:0;background:transparent;color:var(--txt);text-align:center;font:700 16px Oswald,sans-serif;-moz-appearance:textfield;appearance:textfield}
+.qty:focus{outline:0;background:var(--bg);box-shadow:inset 0 0 0 2px var(--gold)}}
 .df .two .btn{min-height:42px;font-size:14px}
 @media(max-width:380px){.brand p{display:none}}
 
