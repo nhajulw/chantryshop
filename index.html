@@ -31,7 +31,7 @@
     <svg class="spin" viewBox="0 0 200 200" aria-hidden="true"><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(0 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(30 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(60 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(90 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(120 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(150 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(180 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(210 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(240 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(270 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(300 100 100)"/><rect x="93" y="6" width="14" height="24" rx="3" transform="rotate(330 100 100)"/><circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="34"/><circle cx="100" cy="100" r="8"/></svg>
     <h2>គ្រឿងបន្លាស់ម៉ូតូ គុណភាពល្អ តម្លៃសមរម្យ</h2>
     <p>ជ្រើសរើសទំនិញ បន្ថែមទៅកន្ត្រក រួចផ្ញើការកម្មង់មកយើងតាម Telegram បានភ្លាមៗ។</p>
-    <div class="cta"><button class="btn call" id="callBtn"><svg class="ic" aria-hidden="true"><use href="#i-call"/></svg> ទូរសព្ទមកហាង</button><a class="btn tg" id="tgBtn" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> Telegram</a></div>
+    <div class="cta"><button class="btn call" id="callBtn"><svg class="ic" aria-hidden="true"><use href="#i-call"/></svg> ទូរស័ព្ទមកហាង</button><a class="btn tg" id="tgBtn" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-tg"/></svg> Telegram</a></div>
   </section>
   <div class="tools">
     <div class="sbox"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><input class="search" id="q" type="search" placeholder="ស្វែងរកគ្រឿងបន្លាស់..." aria-label="ស្វែងរក"></div>
@@ -47,7 +47,7 @@
   <div class="dh"><span>កន្ត្រករបស់អ្នក</span><button class="x" id="closeCart" aria-label="បិទ">×</button></div>
   <div class="dl" id="cartList"></div>
   <div class="df">
-    <div class="two"><input class="in" id="cn" type="text" placeholder="ឈ្មោះ" maxlength="40" autocomplete="name"><input class="in" id="cp" type="tel" placeholder="លេខទូរសព្ទ" maxlength="20" inputmode="tel" autocomplete="tel"></div>
+    <div class="two"><input class="in" id="cn" type="text" placeholder="ឈ្មោះ" maxlength="40" autocomplete="name"><input class="in" id="cp" type="tel" placeholder="លេខទូរស័ព្ទ" maxlength="20" inputmode="tel" autocomplete="tel"></div>
     <input class="in" id="ct" type="text" placeholder="Telegram @username (ស្រេចចិត្ត)" maxlength="33" autocomplete="off" autocapitalize="none" spellcheck="false">
     <div class="tot"><span>សរុប</span><span id="cartTotal">0៛</span></div>
     <p class="hint rt"></p>
@@ -101,7 +101,7 @@
     <div class="acts"><button type="button" class="btn sec" id="mcancel">បោះបង់</button><button class="btn pri">រក្សាទុក</button></div>
   </form>
 </div>
-<div class="modal" id="callm" hidden><div class="form f"><h3>ទូរសព្ទមកហាង</h3><div class="callrow" id="callList"></div><button class="btn sec" id="callx">បិទ</button></div></div>
+<div class="modal" id="callm" hidden><div class="form f"><h3>ទូរស័ព្ទមកហាង</h3><div class="callrow" id="callList"></div><button class="btn sec" id="callx">បិទ</button></div></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script type="module">
@@ -228,7 +228,7 @@ function renderShop(){
    <article class="card ${p.stock?'':'out'}">
     <div class="im">${pic(p)}${p.stock?'':'<b class="tag">អស់ស្តុក</b>'}</div>
     <div class="bd"><small>${esc(p.cat)}</small><h3>${esc(p.name)}</h3>
-     <div class="row"><span class="price num">${money(p)}</span>${cart[p.id]?`<div class="step"><button data-m="${esc(p.id)}" aria-label="ដក">−</button><b>${cart[p.id]}</b><button data-p="${esc(p.id)}" aria-label="បន្ថែម">+</button></div>`:`<button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button>`}</div></div>
+     <div class="row"><span class="price num">${money(p)}</span>${cart[p.id]?`<div class="step"><button data-m="${esc(p.id)}" aria-label="ដក">−</button><input class="qty" type="text" inputmode="numeric" pattern="[0-9]*" value="${cart[p.id]}" data-q="${esc(p.id)}" aria-label="ចំនួន"><button data-p="${esc(p.id)}" aria-label="បន្ថែម">+</button></div>`:`<button class="add" data-id="${esc(p.id)}" ${p.stock?'':'disabled'}>${p.stock?'+ កន្ត្រក':'អស់ស្តុក'}</button>`}</div></div>
    </article>`).join(''):'<div class="empty">រកមិនឃើញទំនិញទេ</div>';
 }
 function cartRows(){ return Object.entries(cart).map(([id,n])=>({p:items.find(x=>x.id===id),n})).filter(r=>r.p&&r.p.stock).map(r=>({...r,unit:priceOf(r.p),amt:priceOf(r.p)*r.n})); }
@@ -363,7 +363,7 @@ async function makeInvoicePdf(){
 // 2) opens the customer's chat with you, message prefilled — they tap Send
 $('#order').onclick = async () => {
   if (!cartRows().length) return;
-  if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរសព្ទ'); $('#cp').focus(); return; }
+  if (!$('#cp').value.trim()) { toast('សូមបញ្ចូលលេខទូរស័ព្ទ'); $('#cp').focus(); return; }
   if (!$('#cn').value.trim()) { toast('សូមបញ្ចូលឈ្មោះ'); $('#cn').focus(); return; }
 
   const btn = $('#order');
@@ -434,7 +434,7 @@ async function makeInvoice(){
   const ty=302+rows.length*RH+28, o=other(cur);
   x.fillStyle='#121214'; x.fillRect(400,ty,360,70); F(700,22); T('សរុប',424,ty+35,'left','#fff'); F(700,34,'Oswald'); T(fmt(total),736,ty+35,'right','#e0b63f');
   F(400,17); T(rateText(),40,ty+100,'left','#777'); T('≈ '+fmt(conv(total,cur,o),o),760,ty+100,'right','#777');
-  F(400,19); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+156); T('ទូរសព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+192); T('Telegram: @'+SHOP.telegram,40,ty+224);
+  F(400,19); T('អរគុណសម្រាប់ការគាំទ្រ!',40,ty+156); T('ទូរស័ព្ទ៖ '+SHOP.phones.map(fmtPh).join(' / '),40,ty+192); T('Telegram: @'+SHOP.telegram,40,ty+224);
   const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.92));
   return {blob,url:URL.createObjectURL(blob),w:W,h:H,no};
 }
