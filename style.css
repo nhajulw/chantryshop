@@ -41,7 +41,8 @@ button{cursor:pointer;border:0;background:none}
 
 /* 4. Header */
 .top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;padding:10px 4%;background:rgba(15,15,18,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--gold-hi),#a67c12);flex:none}
+.logo{width:42px;height:42px;border-radius:50%;overflow:hidden;flex:none;background:var(--raised)}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
 .brand{flex:1;min-width:0;line-height:1.25}
 .brand h1{font-size:18px;color:var(--gold-hi)}
 .brand p{font-size:12px;line-height:1.6;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis} /* 1.6 so Khmer marks aren't clipped */
