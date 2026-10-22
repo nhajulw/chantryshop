@@ -22,7 +22,7 @@
 <!-- ===== SHOP ===== -->
 <div id="shop">
   <header class="top">
-    <div class="logo">🏍️</div>
+    <link rel="icon" href="logo.jpg">
     <div class="brand"><h1 id="sName"></h1><p id="sTag"></p></div>
     <div class="curs" role="group" aria-label="រូបិយប័ណ្ណ"><button data-cur="KHR" aria-label="Riel">៛</button><button data-cur="USD" aria-label="US Dollar">$</button></div>
     <button class="cartbtn" id="openCart" aria-label="កន្ត្រក"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><b id="cc">0</b></button>
@@ -241,7 +241,7 @@ function renderCart(){
   $('#order').disabled=!cnt; $('#invjpg').disabled=!cnt; $('#invpdf').disabled=!cnt;
   $('#cartList').innerHTML=rows.length?rows.map(r=>`
    <div class="ci"><div>${esc(r.p.name)}<em>${fmt(r.amt)}</em></div>
-   <div class="q"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><span>${r.n}</span><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
+   <div class="q"><button data-m="${esc(r.p.id)}" aria-label="ដក">−</button><input class="qty" type="text" inputmode="numeric" pattern="[0-9]*" value="${r.n}" data-q="${esc(r.p.id)}" aria-label="ចំនួន"><button data-p="${esc(r.p.id)}" aria-label="បន្ថែម">+</button></div></div>`).join('')
    :'<div class="empty" style="padding:40px 0">កន្ត្រកទទេ។ សូមជ្រើសរើសទំនិញ។</div>';
 }
 const cartOpen=on=>{ $('#drawer').classList.toggle('on',on); $('#veil').classList.toggle('on',on); };
@@ -262,6 +262,12 @@ for(const box of [$('#grid'),$('#cartList')]){
   box.addEventListener('focusin',e=>{ if(e.target.classList.contains('qty')) e.target.select(); });
   box.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.classList.contains('qty')) e.target.blur(); });
 }
+  const cartClick=e=>{
+  const a=e.target.closest('.add'), m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
+  if(a&&!a.disabled){ change(a.dataset.id,1); toast('បានបន្ថែមទៅកន្ត្រក ✓'); }
+  else if(p) change(p.dataset.p,1);
+  else if(m) change(m.dataset.m,-1);
+};
 $('#grid').onclick=$('#cartList').onclick=cartClick;
 $('#openCart').onclick=()=>cartOpen(true); $('#closeCart').onclick=$('#veil').onclick=()=>cartOpen(false);
 
