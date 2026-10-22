@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0f0f12">
+<link rel="icon" href="logo.jpg">
 <title>ជាងទ្រី - លក់គ្រឿងបន្លាស់ម៉ូតូ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
 <!-- ===== SHOP ===== -->
 <div id="shop">
   <header class="top">
-    <link rel="icon" href="logo.jpg">
+    <div class="logo"><img src="logo.jpg" alt="ជាងទ្រី"></div>
     <div class="brand"><h1 id="sName"></h1><p id="sTag"></p></div>
     <div class="curs" role="group" aria-label="រូបិយប័ណ្ណ"><button data-cur="KHR" aria-label="Riel">៛</button><button data-cur="USD" aria-label="US Dollar">$</button></div>
     <button class="cartbtn" id="openCart" aria-label="កន្ត្រក"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><b id="cc">0</b></button>
@@ -181,7 +182,7 @@ const ICON={'សំបក':TIRE,'ប្រេងម៉ាស៊ីន':OIL,'ខ�
 };
 const art=c=>'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#33333c"/><stop offset="1" stop-color="#1e1e24"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><g fill="none" stroke="#c59b27" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">${ICON[c]||ICON['ផ្សេងៗ']}</g></svg>`);
 const pic=p=>`<img src="${esc(p.img||art(p.cat))}" data-c="${esc(p.cat)}" alt="${esc(p.name)}" loading="lazy">`;
-document.addEventListener('error',e=>{ const t=e.target; if(t.tagName==='IMG'&&!t.dataset.f){ t.dataset.f=1; t.src=art(t.dataset.c); } },true);
+document.addEventListener('error',e=>{ const t=e.target; if(t.tagName==='IMG'&&!t.dataset.f&&t.dataset.c){ t.dataset.f=1; t.src=art(t.dataset.c); } },true);
 let items = [], cat = ALL, q = '', aq = '', af = '', cart = {}, editId = null, img = '';
 
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('on'),2600); }
@@ -262,7 +263,7 @@ for(const box of [$('#grid'),$('#cartList')]){
   box.addEventListener('focusin',e=>{ if(e.target.classList.contains('qty')) e.target.select(); });
   box.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.classList.contains('qty')) e.target.blur(); });
 }
-  const cartClick=e=>{
+const cartClick=e=>{
   const a=e.target.closest('.add'), m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
   if(a&&!a.disabled){ change(a.dataset.id,1); toast('បានបន្ថែមទៅកន្ត្រក ✓'); }
   else if(p) change(p.dataset.p,1);
@@ -371,7 +372,7 @@ async function makeInvoicePdf(){
   URL.revokeObjectURL(inv.url);
   return { blob: new Blob(pdfParts(jpg, inv.w, inv.h), { type:'application/pdf' }), no: inv.no };
 }
-  
+
 // 1) sends the order to your bot automatically (via the Worker)
 // 2) opens the customer's chat with you, message prefilled — they tap Send
 $('#order').onclick = async () => {
