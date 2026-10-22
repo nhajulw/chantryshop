@@ -248,13 +248,20 @@ const cartOpen=on=>{ $('#drawer').classList.toggle('on',on); $('#veil').classLis
 
 $('#cats').onclick=e=>{ const b=e.target.closest('[data-c]'); if(!b)return; cat=b.dataset.c; renderCats(); renderShop(); };
 $('#q').oninput=e=>{ q=e.target.value; renderShop(); };
-const change=(id,d)=>{ cart[id]=(cart[id]||0)+d; if(cart[id]<=0) delete cart[id]; refresh(); for(const el of [$('#cc'),$('#fab')]){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); } };
-const cartClick=e=>{
-  const a=e.target.closest('.add'), m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
-  if(a&&!a.disabled){ change(a.dataset.id,1); toast('បានបន្ថែមទៅកន្ត្រក ✓'); }
-  else if(p) change(p.dataset.p,1);
-  else if(m) change(m.dataset.m,-1);
+const bump=()=>{ for(const el of [$('#cc'),$('#fab')]){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); } };
+const setQty=(id,n)=>{ n=Math.min(Math.max(n|0,0),999); if(n) cart[id]=n; else delete cart[id]; refresh(); bump(); };
+const change=(id,d)=>setQty(id,(cart[id]||0)+d);
+const typed=e=>{
+  const i=e.target.closest('.qty'); if(!i) return;
+  const s=i.value.replace(/[០-៩]/g,d=>'០១២៣៤៥៦៧៨៩'.indexOf(d)).replace(/\D/g,'');   // accepts Khmer digits too
+  if(!s) return refresh();                  // junk input: restore the old number
+  setQty(i.dataset.q,parseInt(s,10));       // 0 removes the item
 };
+for(const box of [$('#grid'),$('#cartList')]){
+  box.addEventListener('change',typed);
+  box.addEventListener('focusin',e=>{ if(e.target.classList.contains('qty')) e.target.select(); });
+  box.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.classList.contains('qty')) e.target.blur(); });
+}
 $('#grid').onclick=$('#cartList').onclick=cartClick;
 $('#openCart').onclick=()=>cartOpen(true); $('#closeCart').onclick=$('#veil').onclick=()=>cartOpen(false);
 
